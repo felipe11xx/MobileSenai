@@ -23,13 +23,11 @@ public class CalcActivity extends AppCompatActivity {
 
         campo_calc.setText(null);
 
-
     }
 
     public void numeros(View v) {
          btn = (Button) v;
             numero = btn.getText().toString();
-
 
         if(numero.equals(",")){
 
@@ -45,6 +43,13 @@ public class CalcActivity extends AppCompatActivity {
             }else{
                 campo_calc.setText(campo_calc.getText()+(String.valueOf(numero)));
             }
+
+        }
+
+
+        if(campo_calc.getText().toString().isEmpty()){
+
+        }else{
 
         }
 
