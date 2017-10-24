@@ -31,7 +31,6 @@ public class CalcActivity extends AppCompatActivity {
          btn = (Button) v;
             numero = btn.getText().toString();
 
-
         if(numero.equals(",")){
 
             if(!campo_calc.getText().toString().contains(",")&&!campo_calc.getText().toString().isEmpty()) {
@@ -50,8 +49,15 @@ public class CalcActivity extends AppCompatActivity {
         }
 
 
+<<<<<<< HEAD
         if(numero.equals("=")){
             campo_calc.setText(String.valueOf(calcula(campo_calc.getText().toString())));
+=======
+        if(campo_calc.getText().toString().isEmpty()){
+
+        }else{
+
+>>>>>>> 3944e915295623a6b07dbe147255cc3a7285e930
         }
 
     }
