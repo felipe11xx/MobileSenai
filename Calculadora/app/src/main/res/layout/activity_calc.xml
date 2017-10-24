@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.10"
         android:keyboardNavigationCluster="false"
+        android:enabled="false"
         android:ems="10"
         android:hint="0"
 
@@ -85,6 +86,7 @@
             android:layout_width="96dp"
             android:layout_height="70dp"
             android:layout_weight="1"
+            android:onClick="numeros"
             android:text="@string/btn_div" />
 
     </LinearLayout>
@@ -123,6 +125,7 @@
             android:layout_width="96dp"
             android:layout_height="70dp"
             android:layout_weight="1"
+            android:onClick="numeros"
             android:text="@string/btn_multi" />
 
     </LinearLayout>
@@ -161,6 +164,7 @@
             android:layout_width="96dp"
             android:layout_height="70dp"
             android:layout_weight="1"
+            android:onClick="numeros"
             android:text="@string/btn_sub" />
     </LinearLayout>
 
@@ -190,6 +194,7 @@
             android:layout_width="96dp"
             android:layout_height="70dp"
             android:layout_weight="1"
+            android:onClick="numeros"
             android:text="@string/btn_igual" />
 
         <Button
@@ -197,6 +202,7 @@
             android:layout_width="96dp"
             android:layout_height="70dp"
             android:layout_weight="1"
+            android:onClick="numeros"
             android:text="@string/btn_soma" />
     </LinearLayout>
 

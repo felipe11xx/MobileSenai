@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import javax.script.*;
 
 public class CalcActivity extends AppCompatActivity {
     private EditText campo_calc;
     private static String numero;
-
+    private static String operação;
+    private double valor;
     private Button btn ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +24,6 @@ public class CalcActivity extends AppCompatActivity {
     public void limpar(View v){
 
         campo_calc.setText(null);
-
 
     }
 
@@ -48,5 +49,25 @@ public class CalcActivity extends AppCompatActivity {
 
         }
 
+
+        if(numero.equals("=")){
+            campo_calc.setText(String.valueOf(calcula(campo_calc.getText().toString())));
+        }
+
     }
+
+    public static Double calcula( String expressao ) {
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByName( "JavaScript" );
+        Object obj = null;
+
+        try {
+            obj = engine.eval( expressao );
+        } catch ( ScriptException exc ) {
+        }
+        Double val = Double.parseDouble(obj.toString());
+        return val ;
+    }
+
+
 }

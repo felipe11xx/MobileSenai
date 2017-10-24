@@ -14,6 +14,7 @@ public class JurosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setContentView(R.layout.layout_juros);
         setContentView(R.layout.layout_juros);
         edCapIni = (EditText) findViewById(R.id.edt_cap_ini);
         edTxJurus = (EditText) findViewById(R.id.edt_tx_juros);
