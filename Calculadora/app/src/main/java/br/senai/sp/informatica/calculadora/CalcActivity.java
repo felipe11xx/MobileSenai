@@ -10,8 +10,7 @@ import javax.script.*;
 public class CalcActivity extends AppCompatActivity {
     private EditText campo_calc;
     private static String numero;
-    private static String operação;
-    private double valor;
+
     private Button btn ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +48,21 @@ public class CalcActivity extends AppCompatActivity {
         }
 
 
-<<<<<<< HEAD
-        if(numero.equals("=")){
-            campo_calc.setText(String.valueOf(calcula(campo_calc.getText().toString())));
-=======
-        if(campo_calc.getText().toString().isEmpty()){
 
-        }else{
+        if(numero.equals("=")) {
+            ScriptEngineManager manager = new ScriptEngineManager();
+            ScriptEngine engine =  manager.getEngineByName( "JavaScript" );
 
->>>>>>> 3944e915295623a6b07dbe147255cc3a7285e930
+            Object obj = new Object() ;
+            try {
+                obj = engine.eval( campo_calc.getText().toString() );
+           } catch ( Exception e ) {
+
+           }
+            Double val = Double.parseDouble(obj.toString());
+            String a = String.valueOf(val);
+            campo_calc.setText(a);
+
         }
 
     }
