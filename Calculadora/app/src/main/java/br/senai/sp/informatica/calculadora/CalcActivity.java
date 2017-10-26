@@ -10,20 +10,19 @@ import javax.script.*;
 public class CalcActivity extends AppCompatActivity {
     private EditText campo_calc;
     private static String numero;
-
     private Button btn ;
+
+    //123teste
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calc);
-
         campo_calc = (EditText) findViewById(R.id.edt_resu);
     }
 
     public void limpar(View v){
-
         campo_calc.setText(null);
-
     }
 
     public void numeros(View v) {
@@ -31,23 +30,16 @@ public class CalcActivity extends AppCompatActivity {
             numero = btn.getText().toString();
 
         if(numero.equals(",")){
-
             if(!campo_calc.getText().toString().contains(",")&&!campo_calc.getText().toString().isEmpty()) {
                 campo_calc.setText(campo_calc.getText() +(String.valueOf(numero)));
-
             }
         }else{
-
             if(campo_calc.getText().toString().startsWith("0") && !campo_calc.getText().toString().startsWith("0,") ){
                 campo_calc.setText(String.valueOf(numero));
-
             }else{
                 campo_calc.setText(campo_calc.getText()+(String.valueOf(numero)));
             }
-
         }
-
-
 
         if(numero.equals("=")) {
             ScriptEngineManager manager = new ScriptEngineManager();
@@ -62,9 +54,7 @@ public class CalcActivity extends AppCompatActivity {
             Double val = Double.parseDouble(obj.toString());
             String a = String.valueOf(val);
             campo_calc.setText(a);
-
         }
-
     }
 
     public static Double calcula( String expressao ) {
@@ -79,6 +69,4 @@ public class CalcActivity extends AppCompatActivity {
         Double val = Double.parseDouble(obj.toString());
         return val ;
     }
-
-
 }
