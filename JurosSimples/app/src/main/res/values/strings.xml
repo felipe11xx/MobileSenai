@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Juros Simples</string>
+    <string name="lbl_cap_ini">Capital Inicial</string>
+    <string name="lbl_tx_juros">Taxa de Juros Mensal</string>
+    <string name="lbl_meses">N° de Meses</string>
+    <string name="lbl_cap_res">Capital Resultante</string>
+    <string name="btn_calc">Calcular</string>
+    <string name="btn_limp">Limpar</string>
+
+</resources>

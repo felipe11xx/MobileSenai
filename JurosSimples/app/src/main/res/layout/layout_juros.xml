@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.senai.sp.informatica.jurossimples.JurosActivity">
+
+    <TextView
+        android:id="@+id/lbl_cap_ini"
+        android:labelFor="@+id/edt_cap_ini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_cap_ini"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.028" />
+
+    <EditText
+        android:id="@+id/edt_cap_ini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp"
+        android:ems="10"
+        android:hint="00.0"
+        android:inputType="numberDecimal"
+        android:textAlignment="textEnd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/lbl_cap_ini"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_cap_ini"
+        tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/lbl_tx_juros"
+        android:labelFor="@+id/edt_tx_juros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_tx_juros"
+        android:layout_marginTop="2dp"
+        app:layout_constraintTop_toBottomOf="@+id/edt_cap_ini"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/edt_cap_ini"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:ignore="RtlHardcoded" />
+
+    <EditText
+        android:id="@+id/edt_tx_juros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp"
+        android:ems="10"
+        android:hint="0,0%"
+        android:inputType="numberDecimal"
+        android:textAlignment="textEnd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/lbl_tx_juros"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_tx_juros"
+        tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/lbl_meses"
+        android:labelFor="@+id/edt_meses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_meses"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/edt_tx_juros"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/edt_tx_juros"
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:ignore="RtlHardcoded" />
+
+    <EditText
+        android:id="@+id/edt_meses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="numberDecimal"
+        android:textAlignment="textEnd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/lbl_meses"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_meses"
+        tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/lbl_cap_res"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_cap_res"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.972"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/edt_meses" />
+
+    <Button
+        android:id="@+id/btn_calc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="145dp"
+        android:layout_marginTop="0dp"
+        android:onClick="calcJurusSimples"
+        android:text="@string/btn_calc"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_limp"
+        tools:ignore="RtlHardcoded" />
+
+    <Button
+        android:id="@+id/btn_limp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:onClick="limpar"
+        android:text="@string/btn_limp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.606"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btn_calc"
+        app:layout_constraintTop_toTopOf="@+id/lbl_cap_ini"
+        app:layout_constraintVertical_bias="0.95"
+        tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/cap_res"
+        android:layout_width="76dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="@+id/lbl_cap_res"
+        app:layout_constraintRight_toRightOf="@+id/lbl_cap_res"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_cap_res"
+        app:layout_constraintVertical_bias="0.044" />
+
+</android.support.constraint.ConstraintLayout>
