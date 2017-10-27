@@ -2,19 +2,12 @@ package br.senai.sp.informatica.calculadora;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-<<<<<<< HEAD
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-=======
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import javax.script.*;
->>>>>>> origin/master
 
 public class CalcActivity extends AppCompatActivity {
     private EditText campo_calc;
@@ -29,7 +22,6 @@ public class CalcActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calc);
         campo_calc = (EditText) findViewById(R.id.edt_resu);
     }
-<<<<<<< HEAD
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_principal, menu);
@@ -44,6 +36,8 @@ public class CalcActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.cor:
+                int cor = getResources().getColor(R.color.lightYellowBackground);
+                getWindow().getDecorView().setBackgroundColor(cor);
                 // vai fazer algo
                 break;
 
@@ -51,9 +45,7 @@ public class CalcActivity extends AppCompatActivity {
 
         return true;
     }
-=======
 
->>>>>>> origin/master
     public void limpar(View v){
         campo_calc.setText(null);
     }
@@ -74,7 +66,6 @@ public class CalcActivity extends AppCompatActivity {
             }
         }
 
-<<<<<<< HEAD
     }
 
 
@@ -97,21 +88,6 @@ public class CalcActivity extends AppCompatActivity {
         }
     }
 
-    public static Double calcula( String expressao ) {
->>>>>>> origin/master
-        ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine engine = manager.getEngineByName( "JavaScript" );
-        Object obj = null;
-
-        try {
-            obj = engine.eval( expressao );
-        } catch ( ScriptException exc ) {
-        }
-        Double val = Double.parseDouble(obj.toString());
-        return val ;
-<<<<<<< HEAD
     }*/
-=======
     }
->>>>>>> origin/master
-}
+
