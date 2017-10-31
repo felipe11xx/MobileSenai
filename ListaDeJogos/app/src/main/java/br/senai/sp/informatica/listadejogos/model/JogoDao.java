@@ -16,6 +16,9 @@ public class JogoDao {
 
     private JogoDao(){
        lista = new ArrayList<>();
+        lista.add(new Jogo(id++,"Dota", "Moba"));
+        lista.add(new Jogo(id++,"Battlefield", "FPS"));
+
     }
 
     public List<Jogo> getLista(){

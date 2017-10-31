@@ -17,6 +17,8 @@ public class Jogo {
         this.id = id;
     }
 
+    public Jogo(Long id, String nome, String genero){}
+
     public Long getId() {
         return id;
     }
