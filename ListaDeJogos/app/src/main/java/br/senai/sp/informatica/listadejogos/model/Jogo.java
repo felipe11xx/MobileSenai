@@ -6,7 +6,6 @@ package br.senai.sp.informatica.listadejogos.model;
 
 public class Jogo {
 
-
     private Long id;
     private String nome;
     private String genero;
@@ -17,7 +16,11 @@ public class Jogo {
         this.id = id;
     }
 
-    public Jogo(Long id, String nome, String genero){}
+    public Jogo(Long id, String nome, String genero) {
+        this.id = id;
+        this.nome = nome;
+        this.genero = genero;
+    }
 
     public Long getId() {
         return id;
@@ -47,12 +50,18 @@ public class Jogo {
 
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Jogo jogo = (Jogo) o;
+
+        return id.equals(jogo.id);
+
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return id.hashCode();
     }
 }
