@@ -3,5 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="fundoDoListView">#0e949e</color>
+    <color name="fundoDoListView">#7b7a7a</color>
+    <color name="fundoDoBotao">#7b7a7a</color>
 </resources>

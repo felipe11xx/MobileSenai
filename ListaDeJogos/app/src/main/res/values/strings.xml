@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Lista De Jogos</string>
+    <string name="nome">Nome</string>
+    <string name="jogo">Jogo</string>
+    <string name="confirma">Confirma</string>
+    <string name="genero">Genero</string>
+
 </resources>

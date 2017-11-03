@@ -46,7 +46,7 @@ public class JogoDao {
         return game;
     }
     public void salvar(Jogo jogo){
-        if(jogo.getId() != null){
+        if(jogo.getId() == null){
             jogo.setId(id++);
             lista.add(jogo);
         }else{
