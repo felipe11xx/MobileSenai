@@ -16,13 +16,13 @@ public class JogoDao {
 
     private JogoDao(){
        lista = new ArrayList<>();
-        lista.add(new Jogo(id++,"Dota", "Moba"));
-        lista.add(new Jogo(id++,"Battlefield 1", "FPS"));
-        lista.add(new Jogo(id++,"Age of Mythology", "RTS"));
-        lista.add(new Jogo(id++,"World of Warcraft", "MMORPG"));
-        lista.add(new Jogo(id++,"HeartStone", "Card Game"));
-        lista.add(new Jogo(id++,"The Evil Within", "Suvivor Horror"));
-        lista.add(new Jogo(id++,"South Park The Fractured But Whole", "RPG"));
+//        lista.add(new Jogo(id++,"Dota", "Moba"));
+//        lista.add(new Jogo(id++,"Battlefield 1", "FPS"));
+//        lista.add(new Jogo(id++,"Age of Mythology", "RTS"));
+//        lista.add(new Jogo(id++,"World of Warcraft", "MMORPG"));
+//        lista.add(new Jogo(id++,"HeartStone", "Card Game"));
+//        lista.add(new Jogo(id++,"The Evil Within", "Suvivor Horror"));
+//        lista.add(new Jogo(id++,"South Park The Fractured But Whole", "RPG"));
 
     }
 

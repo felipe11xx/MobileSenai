@@ -23,13 +23,14 @@ public class EditaActivity extends AppCompatActivity {
     private EditText nomeJogoView,generoView;
     private JogoDao dao = JogoDao.manager;
     private Jogo jogo;
-    private Intent intent = null ;
+    private Intent intent;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.updatelayout);
         nomeJogoView = (EditText) findViewById(R.id.edtNome) ;
         generoView = (EditText) findViewById(R.id.edtGenero) ;
-
+        intent = new Intent(this, MainActivity.class);
     }
 
     @Override
@@ -45,8 +46,7 @@ public class EditaActivity extends AppCompatActivity {
 
 
         if(id == R.id.voltar){
-            intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+          finish();
 
         }
         return true;
@@ -59,7 +59,7 @@ public class EditaActivity extends AppCompatActivity {
         dao.salvar(jogo);
 
         Toast.makeText(this,"Jogo cadastrado abestado",Toast.LENGTH_LONG).show();
-        intent = new Intent(this, MainActivity.class);
+
         startActivity(intent);
     }
 }

@@ -2,14 +2,15 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <item
         android:id="@+id/addIcon"
         android:icon="@drawable/ic_add_black_24dp"
         android:title="add"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/sairIcon"
         android:icon="@drawable/ic_exit_to_app_black_24dp"
         android:title="sair"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="ifRoom" />
 </menu>
