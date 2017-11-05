@@ -6,11 +6,17 @@
     <item
         android:id="@+id/addIcon"
         android:icon="@drawable/ic_add_black_24dp"
-        android:title="add"
+        android:title="@string/add"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/apagaIcon"
+        android:icon="@drawable/ic_delete_black_24dp"
+        android:title="@string/apagar"
+        app:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/sairIcon"
         android:icon="@drawable/ic_exit_to_app_black_24dp"
-        android:title="sair"
-        app:showAsAction="ifRoom" />
+        android:title="@string/sair"
+        app:showAsAction="ifRoom|withText" />
+
 </menu>

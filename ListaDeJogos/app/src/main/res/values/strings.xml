@@ -4,5 +4,8 @@
     <string name="jogo">Jogo</string>
     <string name="confirma">Confirma</string>
     <string name="genero">Genero</string>
-
+    <string name="add">Add</string>
+    <string name="apagar">Apagar</string>
+    <string name="sair">Sair</string>
+    <string name="tituloPrincipal">Cadastro de Jogos</string>
 </resources>
