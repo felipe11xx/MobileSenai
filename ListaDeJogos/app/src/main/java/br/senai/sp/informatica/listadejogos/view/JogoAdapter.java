@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -87,10 +88,10 @@ public class JogoAdapter extends BaseAdapter {
         // atribuir o objeto ao layout
         TextView tvJogo = layout.findViewById(R.id.tvJogo);
         TextView tvGenero = layout.findViewById(R.id.tvGenero);
-
         Jogo jogo = dao.getJogo(mapa.get(linha));
         tvJogo.setText(jogo.getNome());
         tvGenero.setText(jogo.getGenero());
         return layout;
     }
+
 }

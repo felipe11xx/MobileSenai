@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.AdapterView;
-import android.widget.Toast;
+
 
 import br.senai.sp.informatica.listadejogos.R;
 
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private BaseAdapter itemLista;
     private Intent intentEditar ;
-    private CheckBox ck;
+    private MenuItem lixeira,cancelar,add ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         intentEditar = new Intent(this, EditaActivity.class);
         itemLista = new JogoAdapter();
-
         listView = (ListView) findViewById(R.id.lvLista);
         listView.setAdapter(itemLista);
 
@@ -36,29 +35,57 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //Passa parametros de alteração via bundle
-                intentEditar.putExtra("JogoID",itemLista.getItemId(position));
-                startActivity(intentEditar);
-
+                if(!listView.isSelected()){
+                 //Passa parametros de alteração via bundle
+                 intentEditar.putExtra("JogoID", itemLista.getItemId(position));
+                 startActivity(intentEditar);
+             }
             }
         });
 
-        //cria checkBox para realizar exclusão
+        //Seleciona itens da lista que poderão ser deletados
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
+                lixeira.setVisible(true);
+                cancelar.setVisible(true);
+                add.setVisible(false);
+                listView.setSelected(true);
+                if(view.isSelected()){
+                    view.setSelected(false);
+                }else{
+                    view.setSelected(true);
+                }
+
+                if(view.isSelected()){
+                    view.setBackgroundColor(getResources().getColor(R.color.ItemSelecionado));
+
+                }else{
+                    view.setBackgroundColor(getResources().getColor(R.color.fundoDoListView));
+
+                }
+
+                return true;
+            }
+        });
 
     }
     //cria menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_principal, menu);
+        lixeira = menu.findItem(R.id.apagaIcon);
+        cancelar = menu.findItem(R.id.cancelaIcon);
+        add = menu.findItem(R.id.addIcon);
         return true;
     }
 
    //Cliques do menu
    public boolean onOptionsItemSelected (MenuItem item){
-        int id = item.getItemId();
+        int idMenuItem = item.getItemId();
 
-        switch (id){
+        switch (idMenuItem){
             //Abre a tela de Cadastro
             case R.id.addIcon:
                 //Remove os extras do Bundle para não causar conflitos
@@ -71,10 +98,18 @@ public class MainActivity extends AppCompatActivity {
                 this.finishAffinity();
                 break;
 
-            //ação de apagar registros
+           //ação de apagar registros
             case R.id.apagaIcon:
 
+
                 break;
+
+            //cancela a ação de apagar e reseta a MainActivity
+            case R.id.cancelaIcon:
+
+                recreate();
+                break;
+
         }
         return true;
    }
