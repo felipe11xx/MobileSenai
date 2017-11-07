@@ -16,6 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.EditaActivity"
+            android:parentActivityName="view.MainActivity">
+
+            <intent-filter >
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.support.PARENT_ACTICITY"
+                android:value=".view.MainActivity"
+                />
+        </activity>
     </application>
 
 </manifest>
