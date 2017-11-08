@@ -1,6 +1,9 @@
 package br.senai.sp.informatica.listadejogos.view;
 
+<<<<<<< HEAD
 import android.app.ActionBar;
+=======
+>>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -65,7 +68,10 @@ public class EditaActivity extends AppCompatActivity {
 
         if(id == R.id.voltar){
             intent.removeExtra("JogoID");
+<<<<<<< HEAD
             setResult(Activity.RESULT_CANCELED);
+=======
+>>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
             finish();
 
         }
@@ -89,8 +95,14 @@ public class EditaActivity extends AppCompatActivity {
         jogo.setGenero(generoView.getText().toString());
         dao.salvar(jogo);
 
+<<<<<<< HEAD
         setResult(Activity.RESULT_OK);
         Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
+=======
+        Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
+
+        startActivity(intent);
+>>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
         finish();
 
     }

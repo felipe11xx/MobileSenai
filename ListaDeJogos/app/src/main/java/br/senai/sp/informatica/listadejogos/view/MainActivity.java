@@ -1,6 +1,9 @@
 package br.senai.sp.informatica.listadejogos.view;
 
+<<<<<<< HEAD
 import android.content.ClipData;
+=======
+>>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.AdapterView;
 
@@ -20,7 +24,10 @@ public class MainActivity extends AppCompatActivity {
     private BaseAdapter itemLista;
     private Intent intentEditar ;
     private MenuItem lixeira,cancelar,add ;
+<<<<<<< HEAD
     private final int EDITA_JOGO = 0;
+=======
+>>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +46,11 @@ public class MainActivity extends AppCompatActivity {
                 if(!listView.isSelected()){
                  //Passa parametros de alteração via bundle
                  intentEditar.putExtra("JogoID", itemLista.getItemId(position));
+<<<<<<< HEAD
                  startActivityForResult(intentEditar, EDITA_JOGO);
+=======
+                 startActivity(intentEditar);
+>>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
              }
             }
         });
@@ -53,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 cancelar.setVisible(true);
                 add.setVisible(false);
                 listView.setSelected(true);
+<<<<<<< HEAD
 
 
                 if(!listView.isSelected()){
@@ -61,12 +73,27 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     view.setBackgroundColor(getResources().getColor(R.color.fundoDoListView));
                     listView.setSelected(false);
+=======
+                if(view.isSelected()){
+                    view.setSelected(false);
+                }else{
+                    view.setSelected(true);
+                }
+
+                if(view.isSelected()){
+                    view.setBackgroundColor(getResources().getColor(R.color.ItemSelecionado));
+
+                }else{
+                    view.setBackgroundColor(getResources().getColor(R.color.fundoDoListView));
+
+>>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
                 }
 
                 return true;
             }
         });
 
+<<<<<<< HEAD
     }
 
     @Override
@@ -77,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+=======
+    }
+>>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
     //cria menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -96,9 +126,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.addIcon:
                 //Remove os extras do Bundle para não causar conflitos
                 intentEditar.removeExtra("JogoID");
+<<<<<<< HEAD
                 //finish();
                 startActivity(intentEditar);
 
+=======
+                startActivity(intentEditar);
+>>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
                 break;
 
             //fecha Activity
