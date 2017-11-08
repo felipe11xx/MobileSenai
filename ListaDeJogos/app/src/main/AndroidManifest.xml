@@ -16,9 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
+
         <activity android:name=".view.EditaActivity"
-            android:parentActivityName="view.MainActivity">
+            android:parentActivityName=".view.MainActivity"/>
 
             <intent-filter >
                 <category android:name="android.intent.category.DEFAULT" />
@@ -28,13 +28,8 @@
                 android:name="android.support.PARENT_ACTICITY"
                 android:value=".view.MainActivity"
                 />
-=======
-        <activity android:name=".view.EditaActivity">
-            <intent-filter >
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
->>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
-        </activity>
+
+
     </application>
 
 </manifest>

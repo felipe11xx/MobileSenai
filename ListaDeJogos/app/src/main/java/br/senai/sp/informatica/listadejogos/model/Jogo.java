@@ -1,10 +1,12 @@
 package br.senai.sp.informatica.listadejogos.model;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by WEB on 31/10/2017.
  */
 
-public class Jogo {
+public class Jogo implements Comparable<Jogo>{
 
     private Long id;
     private String nome;
@@ -63,5 +65,11 @@ public class Jogo {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    @Override
+    public int compareTo(@NonNull Jogo outro) {
+
+        return nome.compareTo(outro.nome);
     }
 }

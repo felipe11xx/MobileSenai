@@ -1,9 +1,8 @@
 package br.senai.sp.informatica.listadejogos.view;
 
-<<<<<<< HEAD
+
 import android.app.ActionBar;
-=======
->>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -68,10 +67,7 @@ public class EditaActivity extends AppCompatActivity {
 
         if(id == R.id.voltar){
             intent.removeExtra("JogoID");
-<<<<<<< HEAD
-            setResult(Activity.RESULT_CANCELED);
-=======
->>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
+           // setResult(Activity.RESULT_CANCELED);
             finish();
 
         }
@@ -80,30 +76,35 @@ public class EditaActivity extends AppCompatActivity {
 
     //Metodo de inclusão e alteração
 
-    public void cadastrarEditar(View view){
+    public void cadastrarEditar(View view) {
 
         String msg;
         //A classe JogoDao faz o controle de cadastro ou inclusão pela nulidade do ID
-        if (id != null){
+        if (id != null) {
             jogo.setId(id);
             msg = "Jogo alterado abestado !!";
-        }else{
+        } else {
             msg = "Jogo cadastrado abestado !!";
         }
 
         jogo.setNome(nomeJogoView.getText().toString());
         jogo.setGenero(generoView.getText().toString());
-        dao.salvar(jogo);
 
-<<<<<<< HEAD
+        if (nomeJogoView.getText().toString().isEmpty() || generoView.getText().toString().isEmpty()) {
+
+            msg = "Nome do jogo ou genero está vazio !";
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        } else{
+            dao.salvar(jogo);
+
+
         setResult(Activity.RESULT_OK);
-        Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
-=======
-        Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
-
-        startActivity(intent);
->>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         finish();
+
+        //startActivity(intent);
+        }
+        //finish();
 
     }
 

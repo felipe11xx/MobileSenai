@@ -16,15 +16,14 @@ public class JogoDao {
 
     private JogoDao(){
        lista = new ArrayList<>();
-<<<<<<< HEAD
 //        lista.add(new Jogo(id++,"Dota", "Moba"));
 //        lista.add(new Jogo(id++,"Battlefield 1", "FPS"));
 //        lista.add(new Jogo(id++,"Age of Mythology", "RTS"));
-=======
+
         lista.add(new Jogo(id++,"Dota", "Moba"));
         lista.add(new Jogo(id++,"Battlefield 1", "FPS"));
         lista.add(new Jogo(id++,"Age of Mythology", "RTS"));
->>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
+
 //        lista.add(new Jogo(id++,"World of Warcraft", "MMORPG"));
 //        lista.add(new Jogo(id++,"HeartStone", "Card Game"));
 //        lista.add(new Jogo(id++,"The Evil Within", "Suvivor Horror"));
@@ -33,6 +32,8 @@ public class JogoDao {
     }
 
     public List<Jogo> getLista(){
+
+        Collections.sort(lista);
         return Collections.synchronizedList(lista);
     }
 

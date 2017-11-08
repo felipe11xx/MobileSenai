@@ -1,9 +1,5 @@
 package br.senai.sp.informatica.listadejogos.view;
 
-<<<<<<< HEAD
-import android.content.ClipData;
-=======
->>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,23 +7,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.AdapterView;
 
 
 import br.senai.sp.informatica.listadejogos.R;
 
-
 public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private BaseAdapter itemLista;
-    private Intent intentEditar ;
-    private MenuItem lixeira,cancelar,add ;
-<<<<<<< HEAD
+    private Intent intentEditar;
+    private MenuItem lixeira, cancelar, add;
+
     private final int EDITA_JOGO = 0;
-=======
->>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,73 +35,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if(!listView.isSelected()){
-                 //Passa parametros de alteração via bundle
-                 intentEditar.putExtra("JogoID", itemLista.getItemId(position));
-<<<<<<< HEAD
-                 startActivityForResult(intentEditar, EDITA_JOGO);
-=======
-                 startActivity(intentEditar);
->>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
-             }
+                if (!listView.isSelected()) {
+                    //Passa parametros de alteração via bundle
+                    intentEditar.putExtra("JogoID", itemLista.getItemId(position));
+
+                    startActivityForResult(intentEditar, EDITA_JOGO);
+
+                }
             }
         });
 
-        //Seleciona itens da lista que poderão ser deletados
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                lixeira.setVisible(true);
-                cancelar.setVisible(true);
-                add.setVisible(false);
-                listView.setSelected(true);
-<<<<<<< HEAD
-
-
-                if(!listView.isSelected()){
-                    view.setBackgroundColor(getResources().getColor(R.color.ItemSelecionado));
-                    listView.setSelected(true);
-                }else{
-                    view.setBackgroundColor(getResources().getColor(R.color.fundoDoListView));
-                    listView.setSelected(false);
-=======
-                if(view.isSelected()){
-                    view.setSelected(false);
-                }else{
-                    view.setSelected(true);
-                }
-
-                if(view.isSelected()){
-                    view.setBackgroundColor(getResources().getColor(R.color.ItemSelecionado));
-
-                }else{
-                    view.setBackgroundColor(getResources().getColor(R.color.fundoDoListView));
-
->>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
-                }
-
-                return true;
-            }
-        });
-
-<<<<<<< HEAD
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK) {
             itemLista.notifyDataSetChanged();
         }
     }
 
-
-=======
-    }
->>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
     //cria menu
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_principal, menu);
         lixeira = menu.findItem(R.id.apagaIcon);
         cancelar = menu.findItem(R.id.cancelaIcon);
@@ -117,22 +65,20 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-   //Cliques do menu
-   public boolean onOptionsItemSelected (MenuItem item){
+    //Cliques do menu
+    public boolean onOptionsItemSelected(MenuItem item) {
         int idMenuItem = item.getItemId();
 
-        switch (idMenuItem){
+        switch (idMenuItem) {
             //Abre a tela de Cadastro
             case R.id.addIcon:
+
+
                 //Remove os extras do Bundle para não causar conflitos
                 intentEditar.removeExtra("JogoID");
-<<<<<<< HEAD
-                //finish();
-                startActivity(intentEditar);
 
-=======
-                startActivity(intentEditar);
->>>>>>> 0b6d98c092b57a4ba7454ff63228ca729e0aa0bb
+                //finish();
+                startActivityForResult(intentEditar, EDITA_JOGO);
                 break;
 
             //fecha Activity
@@ -140,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 this.finishAffinity();
                 break;
 
-           //ação de apagar registros
+            //ação de apagar registros
             case R.id.apagaIcon:
 
 
@@ -154,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return true;
-   }
-
+    }
 
 }
