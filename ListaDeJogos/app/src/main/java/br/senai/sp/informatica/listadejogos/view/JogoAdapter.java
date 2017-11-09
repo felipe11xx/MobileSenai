@@ -25,6 +25,7 @@ public class JogoAdapter extends BaseAdapter {
 
     private JogoDao dao = JogoDao.manager;
     private Map<Integer,Long> mapa;
+    private boolean statusApaga;
 
     public JogoAdapter() {
         criarMapa();
@@ -93,5 +94,6 @@ public class JogoAdapter extends BaseAdapter {
         tvGenero.setText(jogo.getGenero());
         return layout;
     }
+
 
 }

@@ -11,6 +11,8 @@ public class Jogo implements Comparable<Jogo>{
     private Long id;
     private String nome;
     private String genero;
+   //temporario rever depois
+    private boolean selecionado = false;
 
     public Jogo(){}
 
@@ -22,6 +24,7 @@ public class Jogo implements Comparable<Jogo>{
         this.id = id;
         this.nome = nome;
         this.genero = genero;
+
     }
 
     public Long getId() {
@@ -71,5 +74,13 @@ public class Jogo implements Comparable<Jogo>{
     public int compareTo(@NonNull Jogo outro) {
 
         return nome.compareTo(outro.nome);
+    }
+
+    public boolean isSelecionado() {
+        return selecionado;
+    }
+
+    public void setSelecionado(boolean selecionado) {
+        this.selecionado = selecionado;
     }
 }

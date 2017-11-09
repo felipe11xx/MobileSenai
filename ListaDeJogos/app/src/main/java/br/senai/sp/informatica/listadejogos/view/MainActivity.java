@@ -10,16 +10,22 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import br.senai.sp.informatica.listadejogos.R;
+import br.senai.sp.informatica.listadejogos.model.JogoDao;
 
 public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private BaseAdapter itemLista;
     private Intent intentEditar;
     private MenuItem lixeira, cancelar, add;
-
     private final int EDITA_JOGO = 0;
+    //array para controle de exclusão
+    private List<Long> removeId= new ArrayList<>();
+    private JogoDao dao = JogoDao.manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +41,63 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if (!listView.isSelected()) {
+                //Se a lista de exclusão estiver vazia vai para a tela de alteração
+                if (removeId.isEmpty()) {
                     //Passa parametros de alteração via bundle
                     intentEditar.putExtra("JogoID", itemLista.getItemId(position));
 
                     startActivityForResult(intentEditar, EDITA_JOGO);
 
+                }else{
+
+                    //verifica se o id do item existe na lista de exclusão
+                    if(removeId.contains(itemLista.getItemId(position))){
+                        //se ja existe então retira da lista e volta a cor do item para a original
+                        view.setBackgroundColor(getResources().getColor(R.color.fundoDoListView));
+                        removeId.remove(itemLista.getItemId(position));
+                    }else{
+                        //senão existir add ele na lista
+                        view.setBackgroundColor(getResources().getColor(R.color.ItemSelecionado));
+                        removeId.add(itemLista.getItemId(position));
+                    }
+
+                    //ao deselecionar todos os itens da lista de exclução recria a view com o menu inicial
+                    if(removeId.isEmpty()){
+                        recreate();
+                    }
+
                 }
             }
         });
 
+        //clique longo abre as opções de exclusão e muda o resultado do metodo onItemClick
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //mudança nos botões do menu
+                add.setVisible(false);
+                lixeira.setVisible(true);
+                cancelar.setVisible(true);
+
+                //verifica se o id do item existe na lista de exclusão
+                if(removeId.contains(itemLista.getItemId(position))){
+                    //se ja existe então retira da lista e volta a cor do item para a original
+                    view.setBackgroundColor(getResources().getColor(R.color.fundoDoListView));
+                    removeId.remove(itemLista.getItemId(position));
+                }else{
+                    //senão existir add ele na lista
+                    view.setBackgroundColor(getResources().getColor(R.color.ItemSelecionado));
+                    removeId.add(itemLista.getItemId(position));
+                }
+
+                //ao deselecionar todos os itens da lista de exclução recria a view com o menu inicial
+                if(removeId.isEmpty()){
+                    recreate();
+                }
+                return true;
+            }
+        });
 
     }
 
@@ -72,8 +125,6 @@ public class MainActivity extends AppCompatActivity {
         switch (idMenuItem) {
             //Abre a tela de Cadastro
             case R.id.addIcon:
-
-
                 //Remove os extras do Bundle para não causar conflitos
                 intentEditar.removeExtra("JogoID");
 
@@ -88,8 +139,13 @@ public class MainActivity extends AppCompatActivity {
 
             //ação de apagar registros
             case R.id.apagaIcon:
+                //confere os ids na lista e os apaga ao terminar recria a ActivityMain
+                for (Long id:removeId) {
+                    dao.apagar(id);
 
+                }
 
+                recreate();
                 break;
 
             //cancela a ação de apagar e reseta a MainActivity
