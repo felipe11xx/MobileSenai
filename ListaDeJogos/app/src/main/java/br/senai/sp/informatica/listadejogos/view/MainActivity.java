@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -144,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     dao.apagar(id);
 
                 }
-
+                Toast.makeText(this, "Exclusão concluida", Toast.LENGTH_LONG).show();
                 recreate();
                 break;
 
