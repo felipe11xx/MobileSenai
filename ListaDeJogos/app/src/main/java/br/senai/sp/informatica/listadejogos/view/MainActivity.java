@@ -1,6 +1,8 @@
 package br.senai.sp.informatica.listadejogos.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -140,13 +142,32 @@ public class MainActivity extends AppCompatActivity {
 
             //ação de apagar registros
             case R.id.apagaIcon:
-                //confere os ids na lista e os apaga ao terminar recria a ActivityMain
-                for (Long id:removeId) {
-                    dao.apagar(id);
+                //Cria o Builder do dialogo de exclusão
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(R.string.msgExclusao)
+                        .setTitle(R.string.excluir);
 
-                }
-                Toast.makeText(this, "Exclusão concluida", Toast.LENGTH_LONG).show();
-                recreate();
+                // Cria botões ok e cancelar
+                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //confere os ids na lista e os apaga ao terminar recria a ActivityMain
+                        for (Long idJogo:removeId) {
+                            dao.apagar(idJogo);
+
+                        }
+                        Toast.makeText(getBaseContext(), R.string.msgExclusaoSuccess, Toast.LENGTH_LONG).show();
+                        recreate();
+                    }
+                });
+                builder.setNegativeButton(R.string.cancela, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // se cancelar volta pra tela de exclusão
+                    }
+                });
+                //Cria o  dialogo de exclusão
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
                 break;
 
             //cancela a ação de apagar e reseta a MainActivity

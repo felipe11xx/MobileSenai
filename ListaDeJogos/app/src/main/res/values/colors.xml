@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="fundoDoListView">#7b7a7a</color>
-    <color name="ItemSelecionado">#2e3f8e</color>
+    <color name="colorPrimary">#0DAAFF</color>
+    <color name="colorPrimaryDark">#06557F</color>
+    <color name="colorAccent">#002238</color>
+    <color name="fundoDoListView">#8fa2ac</color>
+    <color name="ItemSelecionado">#0A88CC</color>
 </resources>

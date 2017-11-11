@@ -82,9 +82,9 @@ public class EditaActivity extends AppCompatActivity {
         //A classe JogoDao faz o controle de cadastro ou inclusão pela nulidade do ID
         if (id != null) {
             jogo.setId(id);
-            msg = "Jogo alterado abestado !!";
+            msg = getResources().getString(R.string.jogoAlterado);
         } else {
-            msg = "Jogo cadastrado abestado !!";
+            msg = getResources().getString(R.string.jogoCadastrado);
         }
 
         jogo.setNome(nomeJogoView.getText().toString());
@@ -92,7 +92,7 @@ public class EditaActivity extends AppCompatActivity {
 
         if (nomeJogoView.getText().toString().isEmpty() || generoView.getText().toString().isEmpty()) {
 
-            msg = "Nome do jogo ou genero está vazio !";
+            msg = getResources().getString(R.string.semConteudo);
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         } else{
             dao.salvar(jogo);

@@ -9,4 +9,11 @@
     <string name="sair">Sair</string>
     <string name="tituloPrincipal">Cadastro de Jogos</string>
     <string name="cancela">Cancelar</string>
+    <string name="ok">OK</string>
+    <string name="msgExclusao">Deseja apagar ?</string>
+    <string name="excluir">Excluir</string>
+    <string name="msgExclusaoSuccess">Exclusão concluida</string>
+    <string name="jogoAlterado">"Jogo alterado abestado !!"</string>
+    <string name="jogoCadastrado">Jogo cadastrado abestado !!</string>
+    <string name="semConteudo">Nome do jogo e/ou genero está vazio !</string>
 </resources>
