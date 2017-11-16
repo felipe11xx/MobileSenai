@@ -1,4 +1,5 @@
 <resources>
+<<<<<<< HEAD
 
     <string name="app_name">Pokedex</string>
     <string name="nome">Nome</string>
@@ -7,4 +8,7 @@
     <string name="dexNum">Numero da Dex</string>
     <string name="dtcaptura">Data de Captura</string>
 
+=======
+    <string name="app_name">Pokedex</string>
+>>>>>>> origin/master
 </resources>
