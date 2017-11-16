@@ -93,6 +93,7 @@ public class JogoAdapter extends BaseAdapter {
         tvJogo.setText(jogo.getNome());
         tvGenero.setText(jogo.getGenero());
         return layout;
+        
     }
 
 

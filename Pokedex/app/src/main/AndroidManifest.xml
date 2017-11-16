@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
     package="br.senai.sp.informatica.mobileb.pokedex">
-=======
-    package="informatica.sp.senai.br.pokedex">
->>>>>>> origin/master
 
     <application
         android:allowBackup="true"

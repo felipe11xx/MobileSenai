@@ -4,11 +4,8 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
     defaultConfig {
-<<<<<<< HEAD
         applicationId "br.senai.sp.informatica.mobileb.pokedex"
-=======
-        applicationId "informatica.sp.senai.br.pokedex"
->>>>>>> origin/master
+
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
