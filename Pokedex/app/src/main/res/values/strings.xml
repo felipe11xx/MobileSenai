@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="app_name">Pokedex</string>
+    <string name="nome">Nome</string>
+    <string name="tipo1">Tipo 1°</string>
+    <string name="tipo2">Tipo 2°</string>
+    <string name="dexNum">Numero da Dex</string>
+    <string name="dtcaptura">Data de Captura</string>
+
+</resources>

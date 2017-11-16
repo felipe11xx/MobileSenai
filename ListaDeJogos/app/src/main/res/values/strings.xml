@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Lista De Jogos</string>
+    <string name="nome">Nome</string>
+    <string name="jogo">Jogo</string>
+    <string name="confirma">Confirma</string>
+    <string name="genero">Genero</string>
+    <string name="add">Add</string>
+    <string name="apagar">Apagar</string>
+    <string name="sair">Sair</string>
+    <string name="tituloPrincipal">Cadastro de Jogos</string>
+    <string name="cancela">Cancelar</string>
+    <string name="ok">OK</string>
+    <string name="msgExclusao">Deseja apagar ?</string>
+    <string name="excluir">Excluir</string>
+    <string name="msgExclusaoSuccess">Exclusão concluida</string>
+    <string name="jogoAlterado">"Jogo alterado abestado !!"</string>
+    <string name="jogoCadastrado">Jogo cadastrado abestado !!</string>
+    <string name="semConteudo">Nome do jogo e/ou genero está vazio !</string>
+</resources>

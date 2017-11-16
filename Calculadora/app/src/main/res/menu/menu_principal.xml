@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/cor"
+        android:icon="@drawable/ic_format_paint_black_24dp"
+        android:title="cor"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/sair"
+        android:checkable="false"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
+        android:title="sair"
+        android:visible="true"
+        app:showAsAction="always|withText" />
+</menu>
