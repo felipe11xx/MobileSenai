@@ -6,5 +6,7 @@
     <string name="tipo2">Tipo 2°</string>
     <string name="dexNum">Numero da Dex</string>
     <string name="dtcaptura">Data de Captura</string>
-
+    <string name="salvar">Salvar</string>
+    <string name="sair">Sair</string>
+    <string name="voltar">Voltar</string>
 </resources>

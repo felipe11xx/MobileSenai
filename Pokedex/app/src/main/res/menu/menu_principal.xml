@@ -12,4 +12,16 @@
         android:icon="@drawable/ic_exit_to_app_black_24dp"
         android:title="Sair"
         app:showAsAction="ifRoom|withText" />
+    <item
+        android:id="@+id/saveIcon"
+        android:icon="@drawable/ic_save_black_24dp"
+        android:title="salvar"
+        android:visible="false"
+        app:showAsAction="ifRoom|withText" />
+    <item
+        android:id="@+id/voltarIcon"
+        android:icon="@drawable/ic_arrow_back_black_24dp"
+        android:title="@string/voltar"
+        android:visible="false"
+        app:showAsAction="ifRoom|withText" />
 </menu>

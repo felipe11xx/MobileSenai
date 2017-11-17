@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
     private BaseAdapter itemLista;
+    private Intent i;
+    private final int EDITAR_POKE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.lvLista);
         listView.setAdapter(itemLista);
+
+        i = new Intent(getBaseContext(),EditarActivity.class);
 
     }
 
@@ -48,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (idIconMenu){
             case R.id.addIcon:
-
+              startActivityForResult(i,EDITAR_POKE);
                 break;
             case R.id.exitIcon:
 
