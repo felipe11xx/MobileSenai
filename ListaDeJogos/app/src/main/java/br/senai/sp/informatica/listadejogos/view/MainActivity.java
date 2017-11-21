@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 if (removeId.isEmpty()) {
                     //Passa parametros de alteração via bundle
                     intentEditar.putExtra("JogoID", itemLista.getItemId(position));
-
                     startActivityForResult(intentEditar, EDITA_JOGO);
 
                 }else{

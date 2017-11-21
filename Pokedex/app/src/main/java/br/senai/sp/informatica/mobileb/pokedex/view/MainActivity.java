@@ -3,8 +3,11 @@ package br.senai.sp.informatica.mobileb.pokedex.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
@@ -21,19 +24,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         itemLista = new PokemonAdapter();
-
+        i =  new Intent(this, EditarActivity.class);
         listView = (ListView) findViewById(R.id.lvLista);
         listView.setAdapter(itemLista);
 
-        i = new Intent(getBaseContext(),EditarActivity.class);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("MainActivity","pos: "+ position);
+                i.putExtra("PokeID",itemLista.getItemId(position));
+                startActivityForResult(i,EDITAR_POKE);
+            }
+        });
 
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resutlCode, Intent data){
-        if(resutlCode == RESULT_OK){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(resultCode == RESULT_OK){
             itemLista.notifyDataSetChanged();
         }
     }
@@ -52,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
 
         switch (idIconMenu){
             case R.id.addIcon:
-              startActivityForResult(i,EDITAR_POKE);
+                i.removeExtra("PokeID");
+                startActivityForResult(i,EDITAR_POKE);
+
                 break;
             case R.id.exitIcon:
 
