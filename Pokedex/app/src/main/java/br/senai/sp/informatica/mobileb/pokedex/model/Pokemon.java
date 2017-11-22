@@ -14,6 +14,15 @@ public class Pokemon implements Comparable<Pokemon>{
     private String tipo2;
     private int dexNum;
     private String dtCaptura;
+    private boolean apagar;
+
+    public boolean isApagar() {
+        return apagar;
+    }
+
+    public void setApagar(boolean apagar) {
+        this.apagar = apagar;
+    }
 
     public Pokemon(Long id, String nome, String tipo1, String tipo2, int dexNum, String dtCaptura) {
         this.id = id;

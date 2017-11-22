@@ -2,11 +2,11 @@ package br.senai.sp.informatica.mobileb.pokedex.view;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -17,6 +17,7 @@ import br.senai.sp.informatica.mobileb.pokedex.R;
 import br.senai.sp.informatica.mobileb.pokedex.model.Pokemon;
 import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDao;
 
+
 /**
  * Created by WEB on 31/10/2017.
  */
@@ -25,11 +26,13 @@ public class PokemonAdapter extends BaseAdapter {
 
     private PokemonDao dao = PokemonDao.manager;
     private Map<Integer,Long> mapa;
+    private Context context;
     //private boolean statusApaga;
 
     public PokemonAdapter() {
         criarMapa();
     }
+
 
     @Override
     public void notifyDataSetChanged() {
@@ -70,9 +73,10 @@ public class PokemonAdapter extends BaseAdapter {
     public View getView(int linha, View view, ViewGroup viewGroup) {
 
         ConstraintLayout layout;
+        Context ctx = viewGroup.getContext();
         if(view == null) {
 
-            Context ctx = viewGroup.getContext();
+
             // localizar o serviço de construção do layout
             LayoutInflater inflater =
                     (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -99,6 +103,13 @@ public class PokemonAdapter extends BaseAdapter {
         tvTipo2.setText(pokemon.getTipo2());
         tvDtCap.setText(pokemon.getDtCaptura());
         tvDxNum.setText("Numero Dex #"+String.valueOf(pokemon.getDexNum()));
+
+
+        if(pokemon.isApagar()){
+            view.setBackgroundColor(ctx.getResources().getColor(R.color.ItemSelecionado));
+        }else{
+            view.setBackgroundColor(ctx.getResources().getColor(R.color.fundoDoListView));
+        }
         return layout;
     }
 

@@ -15,15 +15,15 @@ public class PokemonDao {
 
     private PokemonDao (){
         lista = new ArrayList<>();
-        lista.add(new Pokemon(id++,"Bulbasaur","Grama","Veneno",1,"16/11/2017"));
-        lista.add(new Pokemon(id++,"Ivysaur","Grama","Veneno",2,"16/11/2017"));
-        lista.add(new Pokemon(id++,"Venusaur","Grama","Veneno",3,"16/11/2017"));
-        lista.add(new Pokemon(id++,"Charmander","Fogo","",4,"16/11/2017"));
-        lista.add(new Pokemon(id++,"Charmeleon","Fogo","",5,"16/11/2017"));
-        lista.add(new Pokemon(id++,"Charizard","Fogo","Voador",6,"16/11/2017"));
-        lista.add(new Pokemon(id++,"Squirtle","Água","",7,"16/11/2017"));
-        lista.add(new Pokemon(id++,"Wartortle","Água","",8,"16/11/2017"));
-        lista.add(new Pokemon(id++,"Blastoise","Água","",9,"16/11/2017"));
+        lista.add(new Pokemon(id++,"Bulbasaur","Grama","Veneno",1,"16/11/17"));
+        lista.add(new Pokemon(id++,"Ivysaur","Grama","Veneno",2,"16/11/17"));
+        lista.add(new Pokemon(id++,"Venusaur","Grama","Veneno",3,"16/11/17"));
+        lista.add(new Pokemon(id++,"Charmander","Fogo","",4,"16/11/17"));
+        lista.add(new Pokemon(id++,"Charmeleon","Fogo","",5,"16/11/17"));
+        lista.add(new Pokemon(id++,"Charizard","Fogo","Voador",6,"16/11/17"));
+        lista.add(new Pokemon(id++,"Squirtle","Água","",7,"16/11/17"));
+        lista.add(new Pokemon(id++,"Wartortle","Água","",8,"16/11/17"));
+        lista.add(new Pokemon(id++,"Blastoise","Água","",9,"16/11/17"));
     }
 
     public List<Pokemon> getList(){

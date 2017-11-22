@@ -21,6 +21,7 @@
     <color name="colorDark">#6f594b</color>
     <color name="colorSteal">#b8b8ce</color>
     <color name="colorFairy">#ea98ab</color>
-
+    <color name="ItemSelecionado">#a9a5a6</color>
+    <color name="fundoDoListView">#ffffff</color>
 
 </resources>
