@@ -40,7 +40,7 @@ public class PokemonDao {
             }
         }
 
-        Pokemon pokeLocalizado = lista.get(lista.indexOf(new Pokemon(id)));
+//        Pokemon pokeLocalizado = lista.get(lista.indexOf(new Pokemon(id)));
 
         return poke;
     }

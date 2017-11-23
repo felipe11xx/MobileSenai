@@ -73,10 +73,10 @@ public class PokemonAdapter extends BaseAdapter {
     public View getView(int linha, View view, ViewGroup viewGroup) {
 
         ConstraintLayout layout;
-        Context ctx = viewGroup.getContext();
+
         if(view == null) {
 
-
+            Context ctx = viewGroup.getContext();
             // localizar o serviço de construção do layout
             LayoutInflater inflater =
                     (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -106,9 +106,9 @@ public class PokemonAdapter extends BaseAdapter {
 
 
         if(pokemon.isApagar()){
-            view.setBackgroundColor(ctx.getResources().getColor(R.color.ItemSelecionado));
+            layout.setBackgroundColor(viewGroup.getResources().getColor(R.color.ItemSelecionado));
         }else{
-            view.setBackgroundColor(ctx.getResources().getColor(R.color.fundoDoListView));
+            layout.setBackgroundColor(viewGroup.getResources().getColor(R.color.fundoDoListView));
         }
         return layout;
     }

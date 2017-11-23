@@ -56,20 +56,20 @@ public class MainActivity extends AppCompatActivity {
 
                     //verifica se o id do item existe na lista de exclusão
                     if(removeId.contains(itemLista.getItemId(position))){
-                      if(poke.isApagar()) {
+                    //  if(poke.isApagar()) {
                           //se ja existe então retira da lista e volta a cor do item para a original
                           view.setBackgroundColor(getResources().getColor(R.color.fundoDoListView));
 
                           removeId.remove(itemLista.getItemId(position));
                           poke.setApagar(false);
-                      }
+                    //  }
                     }else{
-                       if(!poke.isApagar()) {
+                       //if(!poke.isApagar()) {
                            //senão existir add ele na lista
                            view.setBackgroundColor(getResources().getColor(R.color.ItemSelecionado));
                            removeId.add(itemLista.getItemId(position));
                            poke.setApagar(true);
-                       }
+                      // }
                     }
 
                     //ao deselecionar todos os itens da lista de exclução recria a view com o menu inicial
@@ -95,19 +95,19 @@ public class MainActivity extends AppCompatActivity {
 
                 //verifica se o id do item existe na lista de exclusão
                 if(removeId.contains(itemLista.getItem(position))){
-                    if (poke.isApagar()) {
+                   // if (poke.isApagar()) {
                         //se ja existe então retira da lista e volta a cor do item para a original
                         view.setBackgroundColor(getResources().getColor(R.color.fundoDoListView));
                         removeId.remove(itemLista.getItemId(position));
                         poke.setApagar(false);
-                    }
+                   // }
                 }else{
                     //senão existir add ele na lista
-                    if (!poke.isApagar()) {
+                   // if (!poke.isApagar()) {
                         view.setBackgroundColor(getResources().getColor(R.color.ItemSelecionado));
                         removeId.add(itemLista.getItemId(position));
                         poke.setApagar(true);
-                    }
+                   // }
                 }
 
                 //ao deselecionar todos os itens da lista de exclução recria a view com o menu inicial
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_principal,menu);
         lixoItem = menu.findItem(R.id.apagaIcon);
-        voltaItem = menu.findItem(R.id.voltarIcon);
+        voltaItem = menu.findItem(R.id.desfazIcon);
         addItem = menu.findItem(R.id.addIcon);
 
         return true;
@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         Toast.makeText(getBaseContext(), "Pokemon Apagado !", Toast.LENGTH_LONG).show();
                         recreate();
+                       // removeId.removeAll();
                     }
                 });
                 builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -183,7 +184,13 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
 
-            case R.id.voltarIcon:
+            case R.id.desfazIcon:
+                for (Long idPoke:removeId) {
+                    poke = dao.getPokemon(idPoke);
+                    if(poke.getId() == idPoke) {
+                        poke.setApagar(false);
+                    }
+                }
                 recreate();
                 break;
         }
