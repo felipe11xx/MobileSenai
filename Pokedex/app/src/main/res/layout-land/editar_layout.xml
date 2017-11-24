@@ -47,7 +47,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/edNome" />
 
             <EditText
-                android:id="@+id/edDexNum"
+                android:id="@+id/edNumDex"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -81,7 +81,7 @@
                 android:ems="10"
                 android:hint="@string/dtcaptura"
                 android:inputType="date"
-                app:layout_constraintTop_toBottomOf="@+id/edDexNum"
+                app:layout_constraintTop_toBottomOf="@+id/edNumDex"
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"

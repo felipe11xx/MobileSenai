@@ -2,13 +2,13 @@ package br.senai.sp.informatica.mobileb.pokedex.view;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +26,7 @@ public class PokemonAdapter extends BaseAdapter {
 
     private PokemonDao dao = PokemonDao.manager;
     private Map<Integer,Long> mapa;
-    private Context context;
+    private static DateFormat dtfmt = DateFormat.getDateInstance(DateFormat.LONG);
     //private boolean statusApaga;
 
     public PokemonAdapter() {
@@ -101,7 +101,7 @@ public class PokemonAdapter extends BaseAdapter {
         tvPokemon.setText(pokemon.getNome());
         tvTipo1.setText(pokemon.getTipo1());
         tvTipo2.setText(pokemon.getTipo2());
-        tvDtCap.setText(pokemon.getDtCaptura());
+        tvDtCap.setText(dtfmt.format(pokemon.getDtCaptura()));
         tvDxNum.setText("Numero Dex #"+String.valueOf(pokemon.getDexNum()));
 
 

@@ -2,6 +2,8 @@ package br.senai.sp.informatica.mobileb.pokedex.model;
 
 import android.support.annotation.NonNull;
 
+import java.util.Date;
+
 /**
  * Created by Felipe on 16/11/2017.
  */
@@ -13,18 +15,11 @@ public class Pokemon implements Comparable<Pokemon>{
     private String tipo1;
     private String tipo2;
     private int dexNum;
-    private String dtCaptura;
+    private Date dtCaptura;
     private boolean apagar;
 
-    public boolean isApagar() {
-        return apagar;
-    }
 
-    public void setApagar(boolean apagar) {
-        this.apagar = apagar;
-    }
-
-    public Pokemon(Long id, String nome, String tipo1, String tipo2, int dexNum, String dtCaptura) {
+    public Pokemon(Long id, String nome, String tipo1, String tipo2, int dexNum, Date dtCaptura) {
         this.id = id;
         this.nome = nome;
         this.tipo1 = tipo1;
@@ -38,6 +33,23 @@ public class Pokemon implements Comparable<Pokemon>{
     public Pokemon(Long id) {
 
         this.id = id;
+    }
+
+
+    public boolean isApagar() {
+        return apagar;
+    }
+
+    public void setApagar(boolean apagar) {
+        this.apagar = apagar;
+    }
+
+    public Date getDtCaptura() {
+        return dtCaptura;
+    }
+
+    public void setDtCaptura(Date dtCaptura) {
+        this.dtCaptura = dtCaptura;
     }
 
     public Long getId() {
@@ -80,13 +92,7 @@ public class Pokemon implements Comparable<Pokemon>{
         this.dexNum = dexNum;
     }
 
-    public String getDtCaptura() {
-        return dtCaptura;
-    }
 
-    public void setDtCaptura(String dtCaptura) {
-        this.dtCaptura = dtCaptura;
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -9,10 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import java.text.DateFormat;
+import java.util.Calendar;
 import br.senai.sp.informatica.mobileb.pokedex.R;
 import br.senai.sp.informatica.mobileb.pokedex.model.Pokemon;
 import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDao;
+import br.senai.sp.informatica.mobileb.pokedex.util.DateDialog;
 
 /**
  * Created by WEB on 17/11/2017.
@@ -25,6 +27,8 @@ public class EditarActivity extends AppCompatActivity {
     private Pokemon poke;
     private PokemonDao dao = PokemonDao.manager;
     private Long id;
+    private DateFormat dtfmt = DateFormat.getDateInstance(DateFormat.LONG);
+    private Calendar calendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -54,7 +58,7 @@ public class EditarActivity extends AppCompatActivity {
             dexNumEdt.setText(String.valueOf(poke.getDexNum()));
             tipo1Edt.setText(poke.getTipo1());
             tipo2Edt.setText(poke.getTipo2());
-            dtCapEdt.setText(poke.getDtCaptura());
+            dtCapEdt.setText(dtfmt.format(poke.getDtCaptura()));
         }
 
     }
@@ -92,8 +96,6 @@ public class EditarActivity extends AppCompatActivity {
         return true;
     }
 
-
-
     public void cadastrarEditar() {
 
         String msg;
@@ -113,10 +115,10 @@ public class EditarActivity extends AppCompatActivity {
         }
         poke.setTipo1(tipo1Edt.getText().toString());
         poke.setTipo2(tipo2Edt.getText().toString());
-        poke.setDtCaptura(dtCapEdt.getText().toString());
+        poke.setDtCaptura(calendar.getTime());
 
         if (nomeEdt.getText().toString().isEmpty() || dexNumEdt.getText().toString().isEmpty() ||
-                tipo1Edt.getText().toString().isEmpty()  || dtCapEdt.getText().toString().isEmpty()
+                tipo1Edt.getText().toString().isEmpty() // || dtCapEdt.getText().toString().isEmpty()
                 ) {
 
             msg = "Cadastro Invalido !!";//getResources().getString(R.string.semConteudo);
@@ -132,5 +134,10 @@ public class EditarActivity extends AppCompatActivity {
         }
         //finish();
 
+    }
+
+    public void chamaData(View view){
+        DateDialog.makeDialog(calendar, dtCapEdt)
+                .show(getSupportFragmentManager(), "Data de captura");
     }
 }
