@@ -20,7 +20,7 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toRightOf="@+id/imageView"
+            app:layout_constraintLeft_toRightOf="@+id/imagePoke"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +31,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            app:layout_constraintLeft_toRightOf="@+id/imageView"
+            app:layout_constraintLeft_toRightOf="@+id/imagePoke"
             app:layout_constraintTop_toBottomOf="@+id/nomeTxt" />
 
         <TextView
@@ -68,11 +68,11 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/imageView"
+            app:layout_constraintLeft_toRightOf="@+id/imagePoke"
             app:layout_constraintTop_toBottomOf="@+id/tipo2Txt" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imagePoke"
             android:layout_width="83dp"
             android:layout_height="67dp"
             android:layout_marginLeft="8dp"

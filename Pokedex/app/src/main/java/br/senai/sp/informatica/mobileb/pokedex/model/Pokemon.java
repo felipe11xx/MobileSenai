@@ -19,6 +19,8 @@ public class Pokemon implements Comparable<Pokemon>{
     private boolean apagar;
 
 
+
+
     public Pokemon(Long id, String nome, String tipo1, String tipo2, int dexNum, Date dtCaptura) {
         this.id = id;
         this.nome = nome;
@@ -92,7 +94,15 @@ public class Pokemon implements Comparable<Pokemon>{
         this.dexNum = dexNum;
     }
 
+    public byte[] getFotoPoke() {
+        return fotoPoke;
+    }
 
+    public void setFotoPoke(byte[] fotoPoke) {
+        this.fotoPoke = fotoPoke;
+    }
+
+    private byte[] fotoPoke;
 
     @Override
     public boolean equals(Object o) {

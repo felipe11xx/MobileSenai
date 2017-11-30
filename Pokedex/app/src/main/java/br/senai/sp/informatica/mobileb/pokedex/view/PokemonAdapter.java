@@ -1,11 +1,14 @@
 package br.senai.sp.informatica.mobileb.pokedex.view;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -16,6 +19,7 @@ import java.util.Map;
 import br.senai.sp.informatica.mobileb.pokedex.R;
 import br.senai.sp.informatica.mobileb.pokedex.model.Pokemon;
 import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDao;
+import br.senai.sp.informatica.mobileb.pokedex.util.Utilitarios;
 
 
 /**
@@ -96,6 +100,7 @@ public class PokemonAdapter extends BaseAdapter {
         TextView tvTipo2 = layout.findViewById(R.id.tipo2Txt);
         TextView tvDxNum = layout.findViewById(R.id.dexNumTxt);
         TextView tvDtCap = layout.findViewById(R.id.dtCaptTxt);
+        ImageView ivFoto = layout.findViewById(R.id.imagePoke);
 
         Pokemon pokemon = dao.getPokemon(mapa.get(linha));
         tvPokemon.setText(pokemon.getNome());
@@ -103,8 +108,12 @@ public class PokemonAdapter extends BaseAdapter {
         tvTipo2.setText(pokemon.getTipo2());
         tvDtCap.setText(dtfmt.format(pokemon.getDtCaptura()));
         tvDxNum.setText("Numero Dex #"+String.valueOf(pokemon.getDexNum()));
-
-
+        if(pokemon.getFotoPoke() != null) {
+            ivFoto.setImageBitmap(Utilitarios.bitmapFromBase64(pokemon.getFotoPoke()));
+        }else{
+            Drawable draw = ContextCompat.getDrawable(viewGroup.getContext(), R.mipmap.ic_launcher);
+            ivFoto.setImageDrawable(draw);
+        }
         if(pokemon.isApagar()){
             layout.setBackgroundColor(viewGroup.getResources().getColor(R.color.ItemSelecionado));
         }else{

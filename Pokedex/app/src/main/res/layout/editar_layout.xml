@@ -83,6 +83,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
+
         app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -101,6 +102,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/edDtCap"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edNumDex"
-        app:srcCompat="@android:drawable/ic_menu_month" />
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
 </android.support.constraint.ConstraintLayout>
