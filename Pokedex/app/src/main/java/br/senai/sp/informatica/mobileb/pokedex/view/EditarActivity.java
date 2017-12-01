@@ -31,8 +31,7 @@ import br.senai.sp.informatica.mobileb.pokedex.util.Utilitarios;
  * Created by WEB on 17/11/2017.
  */
 
-public class EditarActivity extends AppCompatActivity
-        implements View.OnClickListener{
+public class EditarActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_GALERY = 0;
     private static final int REQUEST_GALLERY_PERMISSION = 1;
     private EditText nomeEdt,dexNumEdt,tipo1Edt,tipo2Edt,dtCapEdt;
@@ -57,8 +56,6 @@ public class EditarActivity extends AppCompatActivity
         tipo2Edt = (EditText) findViewById(R.id.edTp2);
         dtCapEdt = (EditText) findViewById(R.id.edDtCap);
         ivFoto = (ImageView) findViewById(R.id.imgPoke);
-        ivFoto.setOnClickListener(this);
-
 
         i = new Intent(this, MainActivity.class);
         //Recebe ou não valores da Activity anterior via bundle
@@ -66,16 +63,15 @@ public class EditarActivity extends AppCompatActivity
 
         if(bundlePoke != null) {
             id = bundlePoke.getLong("PokeID");
-            poke.setNome(dao.getPokemon(id).getNome());
-            poke.setDexNum(dao.getPokemon(id).getDexNum());
-            poke.setTipo1(dao.getPokemon(id).getTipo1());
-            poke.setTipo2(dao.getPokemon(id).getTipo2());
-            poke.setDtCaptura(dao.getPokemon(id).getDtCaptura());
+            poke = dao.getPokemon(id);
             nomeEdt.setText(poke.getNome());
             dexNumEdt.setText(String.valueOf(poke.getDexNum()));
             tipo1Edt.setText(poke.getTipo1());
             tipo2Edt.setText(poke.getTipo2());
             dtCapEdt.setText(dtfmt.format(poke.getDtCaptura()));
+            if(poke.getFotoPoke() != null){
+                ivFoto.setImageBitmap(Utilitarios.bitmapFromBase64(poke.getFotoPoke()));
+            }
         }
 
     }
@@ -139,6 +135,7 @@ public class EditarActivity extends AppCompatActivity
         if(bitmap != null) {
             // Demonstra como converter um Bitmap para Base64
             byte[] bytes = Utilitarios.bitmapToBase64(bitmap);
+            ivFoto.setImageBitmap(Utilitarios.bitmapFromBase64(bytes));
             poke.setFotoPoke(bytes);
         }
 
@@ -166,9 +163,7 @@ public class EditarActivity extends AppCompatActivity
                 .show(getSupportFragmentManager(), "Data de captura");
     }
 
-
-    @Override
-    public void onClick(View v) {
+    public void abrirImagem(View v) {
         abriGallery();
     }
 
@@ -177,15 +172,16 @@ public class EditarActivity extends AppCompatActivity
         i.setType("image/*");
         i.setAction(i.ACTION_GET_CONTENT);
 
-        if(i.resolveActivity(getPackageManager()) != null){
-            if((ContextCompat.checkSelfPermission(getBaseContext(),
-                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)){
+        if(i.resolveActivity(getPackageManager()) != null) {
+            if ((ContextCompat.checkSelfPermission(getBaseContext(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
                 ActivityCompat.requestPermissions(this, new String[]{
                         Manifest.permission.READ_EXTERNAL_STORAGE
                 }, REQUEST_GALLERY_PERMISSION);
+
+            } else {
+                startActivityForResult(Intent.createChooser(i, "Selecione a Foto"), REQUEST_IMAGE_GALERY);
             }
-        }else{
-            startActivityForResult(Intent.createChooser(i, "Selecione a Foto"),REQUEST_IMAGE_GALERY);
         }
     }
 

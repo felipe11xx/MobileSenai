@@ -111,7 +111,7 @@ public class PokemonAdapter extends BaseAdapter {
         if(pokemon.getFotoPoke() != null) {
             ivFoto.setImageBitmap(Utilitarios.bitmapFromBase64(pokemon.getFotoPoke()));
         }else{
-            Drawable draw = ContextCompat.getDrawable(viewGroup.getContext(), R.mipmap.ic_launcher);
+            Drawable draw = ContextCompat.getDrawable(viewGroup.getContext(), R.mipmap.img_pokeball);
             ivFoto.setImageDrawable(draw);
         }
         if(pokemon.isApagar()){
