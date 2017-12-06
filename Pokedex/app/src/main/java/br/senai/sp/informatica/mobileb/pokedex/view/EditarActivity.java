@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -160,13 +159,13 @@ public class EditarActivity extends AppCompatActivity {
     }
 
     public void chamaData(View view){
-        DateDialog.makeDialog(calendar, dtCapEdt)
+        DateDialog.makeDialog(calendar, R.id.edDtCap)
                 .show(getSupportFragmentManager(), "Data de captura");
     }
 
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+    public void onSaveInstanceState(Bundle outState) {
         Bitmap bitmap = Utilitarios.bitmapFromImageView(ivFoto);
         if(bitmap != null) {
             outState.putByteArray("FotoPoke", Utilitarios.bitmapToBase64(bitmap));
@@ -251,7 +250,6 @@ public class EditarActivity extends AppCompatActivity {
             }
         }
     }
-
 
 
 }
