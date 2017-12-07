@@ -18,4 +18,22 @@
     <string name="action_settings">Settings</string>
     <string name="android_studio">pessoaNome</string>
     <string name="email">joselito_nbrincar@mtv.com</string>
+
+    <string name="preferencias">Preferências</string>
+    <string name="perfil">Perfil</string>
+
+    <string name="ordem_default">Num Dex</string>
+    <string name="ordem_titulo">Ordem dos Albuns</string>
+    <string name="ordem_key">ORDEM_DA_LISTA</string>
+    <string name="ordem_sumario">Define a ordem como os álbums aparecerão na lista principal</string>
+
+    <string name="filtro_titulo">Filtro de Pokemons</string>
+    <string name="filtro_key">FILTRO_HABILITADO</string>
+    <string name="dados_do_usuario">Dados do Usuário</string>
+
+    <string-array name="ordem_itens">
+        <item>Num Dex</item>
+        <item>Nome</item>
+        <item>Data de captura</item>
+    </string-array>
 </resources>
