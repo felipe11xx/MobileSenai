@@ -2,4 +2,6 @@
     <string name="app_name">Animes</string>
     <string name="rv_nome">Nome</string>
     <string name="rv_genero">Genero</string>
+    <string name="mn_apagar">Apagar</string>
+    <string name="mn_editar">Editar</string>
 </resources>

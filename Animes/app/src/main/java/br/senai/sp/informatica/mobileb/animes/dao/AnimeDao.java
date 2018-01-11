@@ -27,6 +27,8 @@ public class AnimeDao {
         lista.add(new Anime(id++, "Another",  "Suspense"));
         lista.add(new Anime(id++, "Fullmetal Alchemist Brotherhood", "Ação"));
         lista.add(new Anime(id++, "Soul Eater", "ficção"));
+        lista.add(new Anime(id++, "One Punch Man", "Luta"));
+        lista.add(new Anime(id++, "Trigun", "faroeste-espacial"));
 
     }
 

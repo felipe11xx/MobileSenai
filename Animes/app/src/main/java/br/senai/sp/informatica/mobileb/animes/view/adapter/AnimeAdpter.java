@@ -31,19 +31,25 @@ public class AnimeAdpter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.anime_item_lista, parent, false);
-        //continuar daqui
-        //AnimeViewHolder holder = new AnimeViewHolder(view, this);
 
-       // return holder;
+        AnimeViewHolder holder = new AnimeViewHolder(view, this);
+
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
+        AnimeViewHolder viewHolder = (AnimeViewHolder) holder;
+
+        Anime anime = animes.get(position);
+
+        ((AnimeViewHolder) holder).preencher(anime);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+
+        return animes.size();
     }
 }
