@@ -7,5 +7,5 @@ package br.senai.sp.informatica.mobileb.animes.view.adapter;
 public interface AdpterInterface {
 
     void setEditar(boolean value);
-
+    void notificaAtualizacao();
 }
