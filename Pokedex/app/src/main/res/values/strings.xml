@@ -23,7 +23,7 @@
     <string name="perfil">Perfil</string>
 
     <string name="ordem_default">Num Dex</string>
-    <string name="ordem_titulo">Ordem dos Albuns</string>
+    <string name="ordem_titulo">Ordem dos Pokemon</string>
     <string name="ordem_key">ORDEM_DA_LISTA</string>
     <string name="ordem_sumario">Define a ordem como os álbums aparecerão na lista principal</string>
 

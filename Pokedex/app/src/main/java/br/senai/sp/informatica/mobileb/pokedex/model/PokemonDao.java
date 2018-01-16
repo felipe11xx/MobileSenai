@@ -3,6 +3,7 @@ package br.senai.sp.informatica.mobileb.pokedex.model;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -33,6 +34,24 @@ public class PokemonDao {
         return Collections.synchronizedList(lista);
     }
 
+    public List<Long> listarIds(String ordem){
+
+        if(ordem.equals("Num Dex")){
+            Collections.sort(lista);
+        }else if(ordem.equals("Nome")){
+            Collections.sort(lista,new OrdenaPorNome());
+        }else{
+            Collections.sort(lista,new OrdenaDtCaptura());
+        }
+
+        List<Long> ids = new ArrayList<>();
+        for(Pokemon obj: lista){
+            ids.add(obj.getId());
+        }
+
+        return ids;
+    }
+
     public Pokemon getPokemon(final Long id){
         Pokemon poke = null;
         for (Pokemon pokemon: lista) {
@@ -60,4 +79,19 @@ public class PokemonDao {
         lista.remove(new Pokemon(id));
     }
 
+    class OrdenaPorNome implements Comparator<Pokemon> {
+
+        @Override
+        public int compare(Pokemon poke1, Pokemon poke2) {
+            return poke1.getNome().compareToIgnoreCase(poke2.getNome());
+        }
+    }
+
+    class OrdenaDtCaptura implements Comparator<Pokemon> {
+
+        @Override
+        public int compare(Pokemon poke1, Pokemon poke2) {
+            return poke1.getDtCaptura().compareTo(poke2.getDtCaptura());
+        }
+    }
 }

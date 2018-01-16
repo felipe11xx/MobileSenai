@@ -1,9 +1,13 @@
 package br.senai.sp.informatica.mobileb.pokedex.view;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +32,15 @@ import br.senai.sp.informatica.mobileb.pokedex.util.Utilitarios;
 
 public class PokemonAdapter extends BaseAdapter {
 
+    private final Activity activity;
     private PokemonDao dao = PokemonDao.manager;
     private Map<Integer,Long> mapa;
     private static DateFormat dtfmt = DateFormat.getDateInstance(DateFormat.LONG);
     //private boolean statusApaga;
 
-    public PokemonAdapter() {
+    public PokemonAdapter(Activity activity) {
+
+        this.activity = activity;
         criarMapa();
     }
 
@@ -46,15 +53,23 @@ public class PokemonAdapter extends BaseAdapter {
     }
 
     private void criarMapa(){
+
+        String ordemPreference = activity.getResources().getString(R.string.ordem_key);
+
+        String ordemDefault = activity.getResources().getString(R.string.ordem_default);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+
+        String ordem = preferences.getString(ordemPreference, ordemDefault);
+Log.d("Adapter", ordem);
         //Cira mapa com associação de linha e ID
         mapa = new HashMap<>();
         //Recebe as lista de obj DAO
-        List<Pokemon> lista = dao.getList();
-
+        List<Long> ids = dao.listarIds(ordem);
         //associa o id com o numero da linha
-        for (int linha = 0; linha < lista.size(); linha++ ){
-            Pokemon pokemon = lista.get(linha);
-            mapa.put(linha, pokemon.getId());
+        for (int linha = 0; linha < ids.size(); linha++ ){
+
+            mapa.put(linha, ids.get(linha));
         }
     }
 

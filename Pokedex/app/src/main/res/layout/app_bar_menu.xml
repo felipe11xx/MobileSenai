@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.senai.sp.informatica.mobileb.pokedex.view.UserActivity">
+    tools:context="br.senai.sp.informatica.mobileb.pokedex.view.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -20,18 +22,19 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/activity_main"
-        android:layout_height="602dp" />
+    <include layout="@layout/activity_main" />
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        app:elevation="6dp"
-        android:layout_gravity="bottom|end"
-        app:srcCompat="@drawable/ic_add_black_24dp" />
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/btAdd"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+
+        <!--app:elevation="6dp"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--app:srcCompat="@drawable/ic_add_black_24dp"-->
+        <!--tools:ignore="VectorDrawableCompat" />-->
 
 </android.support.design.widget.CoordinatorLayout>

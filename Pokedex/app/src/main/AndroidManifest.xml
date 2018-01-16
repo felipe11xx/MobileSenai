@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.senai.sp.informatica.mobileb.pokedex">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -11,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".view.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,6 +29,34 @@
             </intent-filter>
         </activity>
 
-    </application>
 
+
+    <activity android:name=".view.PreferenciasActivity"
+        android:parentActivityName=".view.MainActivity"
+        android:label="@string/preferencias">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".view.MainActivity" />
+    </activity>
+
+    <activity android:name=".view.UserActivity"
+        android:parentActivityName=".view.MainActivity"
+        android:label="@string/dados_do_usuario">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".view.MainActivity" />
+    </activity>
+
+    <activity android:name=".util.PhotoEditorActivity" />
+
+    <provider
+        android:authorities="br.senai.sp.informatica.albunsmusicais.provider"
+        android:name="android.support.v4.content.FileProvider"
+        android:grantUriPermissions="true"
+        android:exported="false">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/paths_provider" />
+    </provider>
+    </application>
 </manifest>

@@ -2,7 +2,13 @@ package br.senai.sp.informatica.mobileb.pokedex.view;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -25,8 +31,9 @@ import java.util.List;
 import br.senai.sp.informatica.mobileb.pokedex.R;
 import br.senai.sp.informatica.mobileb.pokedex.model.Pokemon;
 import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDao;
+import br.senai.sp.informatica.mobileb.pokedex.util.Utilitarios;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView listView;
     private BaseAdapter itemLista;
@@ -43,16 +50,22 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvNome;
     private TextView tvEmail;
     private ImageView ivFoto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        itemLista = new PokemonAdapter();
+       // setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_menu);
+
+        itemLista = new PokemonAdapter(this);
         i =  new Intent(this, EditarActivity.class);
         listView = (ListView) findViewById(R.id.lvLista);
         listView.setAdapter(itemLista);
         removeId =  new ArrayList<>();
 
+//        // Configura o Float Action Button
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.btAdd);
+//        fab.setOnClickListener(this);
 
         // Configuração do ToolBar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -67,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Registro dos menu para tratar as ações do menu de navegação
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-       // navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(this);
+
 
         // Inicializa oa atributor do Navigation Drawer
         View cabecalho = navigationView.getHeaderView(0);
@@ -79,8 +93,6 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
 
                 poke = dao.getPokemon(id);
                 //Se a lista de exclusão estiver vazia vai para a tela de alteração
@@ -158,6 +170,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        tvNome.setText(preferences.getString(UserActivity.NOME_USUARIO, ""));
+        tvEmail.setText(preferences.getString(UserActivity.EMAIL_USUARIO, ""));
+
+        String fotoString = preferences.getString(UserActivity.FOTO_USUARIO, null);
+        if(fotoString != null){
+            Bitmap bitmap = Utilitarios.bitmapFromBase64(fotoString.getBytes());
+            ivFoto.setImageBitmap(Utilitarios.toCircularBitmap(bitmap));
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(resultCode == RESULT_OK){
             itemLista.notifyDataSetChanged();
@@ -172,6 +200,14 @@ public class MainActivity extends AppCompatActivity {
         addItem = menu.findItem(R.id.addIcon);
 
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        super.onBackPressed();
     }
 
     @Override
@@ -234,4 +270,28 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.nav_pref:
+
+                Intent tela = new Intent(getBaseContext(), PreferenciasActivity.class);
+                startActivityForResult(tela, PREF_ACTION);
+                break;
+
+            case R.id.nav_perfil:
+                Intent intent = new Intent(this, UserActivity.class);
+                startActivity(intent);
+                break;
+        }
+
+        drawer.closeDrawer(GravityCompat.START);
+
+        return true;
+    }
+
+
 }
