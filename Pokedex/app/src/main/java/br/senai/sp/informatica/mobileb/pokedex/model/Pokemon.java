@@ -122,12 +122,12 @@ public class Pokemon implements Comparable<Pokemon>{
 
     @Override
     public int compareTo(@NonNull Pokemon outroPokemon) {
-        if(dexNum < outroPokemon.getDexNum()){
-            return dexNum;
-        }else{
-            return outroPokemon.getDexNum();
-        }
-
+//        if(dexNum < outroPokemon.getDexNum()){
+//            return dexNum;
+//        }else{
+//            return outroPokemon.getDexNum();
+//        }
+        return dexNum - outroPokemon.getDexNum();
 
     }
 }

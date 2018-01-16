@@ -1,5 +1,7 @@
 package br.senai.sp.informatica.mobileb.pokedex.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -37,10 +39,13 @@ public class PokemonDao {
     public List<Long> listarIds(String ordem){
 
         if(ordem.equals("Num Dex")){
+            Log.d("Adapter", ordem);
             Collections.sort(lista);
         }else if(ordem.equals("Nome")){
+            Log.d("Adapter", ordem);
             Collections.sort(lista,new OrdenaPorNome());
         }else{
+            Log.d("Adapter", ordem);
             Collections.sort(lista,new OrdenaDtCaptura());
         }
 

@@ -61,7 +61,7 @@ public class PokemonAdapter extends BaseAdapter {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
 
         String ordem = preferences.getString(ordemPreference, ordemDefault);
-Log.d("Adapter", ordem);
+
         //Cira mapa com associação de linha e ID
         mapa = new HashMap<>();
         //Recebe as lista de obj DAO
