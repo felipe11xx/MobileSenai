@@ -1,5 +1,6 @@
 package br.senai.sp.informatica.mobileb.pokedex.view;
 
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -189,6 +190,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(resultCode == RESULT_OK){
             itemLista.notifyDataSetChanged();
+
         }
     }
 
@@ -208,6 +210,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         }
         super.onBackPressed();
+
     }
 
     @Override

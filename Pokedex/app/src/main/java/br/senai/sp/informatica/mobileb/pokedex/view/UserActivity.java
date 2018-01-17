@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -86,7 +87,6 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         edNome.setText(preferences.getString(NOME_USUARIO, ""));
         edEmail.setText(preferences.getString(EMAIL_USUARIO, ""));
-
         String fotoString = preferences.getString(FOTO_USUARIO, null);
         if(fotoString != null && !novaFoto){
             Bitmap bitmap = Utilitarios.bitmapFromBase64(fotoString.getBytes());

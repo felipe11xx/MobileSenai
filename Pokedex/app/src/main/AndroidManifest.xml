@@ -10,7 +10,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -28,8 +28,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-
 
     <activity android:name=".view.PreferenciasActivity"
         android:parentActivityName=".view.MainActivity"
@@ -50,7 +48,7 @@
     <activity android:name=".util.PhotoEditorActivity" />
 
     <provider
-        android:authorities="br.senai.sp.informatica.albunsmusicais.provider"
+        android:authorities="br.senai.sp.informatica.mobileb.pokedex.provider"
         android:name="android.support.v4.content.FileProvider"
         android:grantUriPermissions="true"
         android:exported="false">
