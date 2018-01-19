@@ -1,4 +1,4 @@
-package br.senai.sp.informatica.mobileb.pokedex.view;
+package br.senai.sp.informatica.mobileb.pokedex.view.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,9 +109,9 @@ public class PokemonAdapter extends BaseAdapter {
 
         // o registro da posição solicitada e encontrar o objeto
         // atribuir o objeto ao layout
-        TextView tvPokemon = layout.findViewById(R.id.nomeTxt);
-        TextView tvTipo1 = layout.findViewById(R.id.tipo1txt);
-        TextView tvTipo2 = layout.findViewById(R.id.tipo2Txt);
+        TextView tvPokemon = layout.findViewById(R.id.cardNome);
+        TextView tvTipo1 = layout.findViewById(R.id.cardTipo1);
+        TextView tvTipo2 = layout.findViewById(R.id.cardTipo2);
         TextView tvDxNum = layout.findViewById(R.id.dexNumTxt);
         TextView tvDtCap = layout.findViewById(R.id.dtCaptTxt);
         ImageView ivFoto = layout.findViewById(R.id.imagePoke);
@@ -129,6 +128,7 @@ public class PokemonAdapter extends BaseAdapter {
             Drawable draw = ContextCompat.getDrawable(viewGroup.getContext(), R.mipmap.img_pokeball);
             ivFoto.setImageDrawable(draw);
         }
+
         if(pokemon.isApagar()){
             layout.setBackgroundColor(viewGroup.getResources().getColor(R.color.ItemSelecionado));
         }else{

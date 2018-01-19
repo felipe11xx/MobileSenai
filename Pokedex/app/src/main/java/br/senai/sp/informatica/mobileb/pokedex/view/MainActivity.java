@@ -33,6 +33,7 @@ import br.senai.sp.informatica.mobileb.pokedex.R;
 import br.senai.sp.informatica.mobileb.pokedex.model.Pokemon;
 import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDao;
 import br.senai.sp.informatica.mobileb.pokedex.util.Utilitarios;
+import br.senai.sp.informatica.mobileb.pokedex.view.adapter.PokemonAdapter;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

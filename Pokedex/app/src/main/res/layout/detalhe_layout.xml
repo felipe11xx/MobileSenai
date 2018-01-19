@@ -10,7 +10,7 @@
         tools:ignore="ExtraText">
 
         <TextView
-            android:id="@+id/nomeTxt"
+            android:id="@+id/cardNome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -25,26 +25,26 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tipo1txt"
+            android:id="@+id/cardTipo1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
             app:layout_constraintLeft_toRightOf="@+id/imagePoke"
-            app:layout_constraintTop_toBottomOf="@+id/nomeTxt" />
+            app:layout_constraintTop_toBottomOf="@+id/cardNome" />
 
         <TextView
-            android:id="@+id/tipo2Txt"
+            android:id="@+id/cardTipo2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toRightOf="@+id/tipo1txt"
+            app:layout_constraintLeft_toRightOf="@+id/cardTipo1"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nomeTxt" />
+            app:layout_constraintTop_toBottomOf="@+id/cardNome" />
 
         <TextView
             android:id="@+id/dtCaptTxt"
@@ -58,7 +58,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toRightOf="@+id/dexNumTxt"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tipo2Txt" />
+            app:layout_constraintTop_toBottomOf="@+id/cardTipo2" />
 
         <TextView
             android:id="@+id/dexNumTxt"
@@ -69,7 +69,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/imagePoke"
-            app:layout_constraintTop_toBottomOf="@+id/tipo2Txt" />
+            app:layout_constraintTop_toBottomOf="@+id/cardTipo2" />
 
         <ImageView
             android:id="@+id/imagePoke"

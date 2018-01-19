@@ -25,7 +25,7 @@
     <string name="ordem_default">Num Dex</string>
     <string name="ordem_titulo">Ordem dos Pokemon</string>
     <string name="ordem_key">ORDEM_DA_LISTA</string>
-    <string name="ordem_sumario">Define a ordem como os álbums aparecerão na lista principal</string>
+    <string name="ordem_sumario">Define a ordem como os Pokemon aparecerão na lista principal</string>
 
     <string name="filtro_titulo">Filtro de Pokemons</string>
     <string name="filtro_key">FILTRO_HABILITADO</string>
@@ -35,5 +35,15 @@
         <item>Num Dex</item>
         <item>Nome</item>
         <item>Data de captura</item>
+    </string-array>
+
+    <string name="layout_default">Lista</string>
+    <string name="layout_titulo">Tipo de exibição</string>
+    <string name="layout_key">TIPO_LAYOUT</string>
+    <string name="layout_sumario">Define um tipo de layout a ser exibido </string>
+
+    <string-array name="layouts_ordem">
+        <item>Card</item>
+        <item>Lista</item>
     </string-array>
 </resources>

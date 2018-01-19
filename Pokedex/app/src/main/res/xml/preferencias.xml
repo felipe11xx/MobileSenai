@@ -11,6 +11,15 @@
         android:summary="@string/ordem_sumario"
 
         />
+    <ListPreference
+        android:defaultValue="@string/layout_default"
+        android:title="@string/layout_titulo"
+        android:entries="@array/layouts_ordem"
+        android:entryValues="@array/layouts_ordem"
+        android:key="@string/layout_key"
+        android:summary="@string/layout_sumario"
+
+        />
     <SwitchPreference
         android:defaultValue="false"
         android:key="@string/filtro_key"
