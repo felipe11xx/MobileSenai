@@ -17,7 +17,7 @@ import java.util.List;
 
 import br.senai.sp.informatica.mobileb.pokedex.R;
 import br.senai.sp.informatica.mobileb.pokedex.model.Pokemon;
-import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDao;
+import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDaoOld;
 import br.senai.sp.informatica.mobileb.pokedex.util.Utilitarios;
 
 /**
@@ -27,7 +27,7 @@ import br.senai.sp.informatica.mobileb.pokedex.util.Utilitarios;
 public class PokemonAdpterRecycle extends RecyclerView.Adapter<PokemonAdpterRecycle.PokemonViewHolder>
             implements  AdapterInterface{
 
-    private PokemonDao dao = PokemonDao.manager;
+    private PokemonDaoOld dao = PokemonDaoOld.manager;
     private SparseLongArray mapa;
     private Activity activity;
     private OnItemClickListener listener;

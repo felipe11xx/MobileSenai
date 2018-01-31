@@ -1,102 +1,126 @@
 package br.senai.sp.informatica.mobileb.pokedex.model;
 
-import android.util.Log;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.List;
 
+import br.senai.sp.informatica.mobileb.pokedex.Main;
+
 /**
- * Created by Felipe on 16/11/2017.
+ * Created by WEB on 30/01/2018.
  */
 
-public class PokemonDao {
-    public static PokemonDao manager = new PokemonDao();
-    private List<Pokemon> lista;
-    private long id = 0;
+public class PokemonDao extends SQLiteOpenHelper {
+    public static PokemonDao instance = new PokemonDao();
 
-    private PokemonDao (){
-        lista = new ArrayList<>();
-        lista.add(new Pokemon(id++,"Bulbasaur","Grama","Veneno",1,new GregorianCalendar(2017, Calendar.NOVEMBER,10).getTime()));
-        lista.add(new Pokemon(id++,"Ivysaur","Grama","Veneno",2,new GregorianCalendar(2017,Calendar.NOVEMBER,10).getTime()));
-        lista.add(new Pokemon(id++,"Venusaur","Grama","Veneno",3,new GregorianCalendar(2017,Calendar.NOVEMBER,10).getTime()));
-        lista.add(new Pokemon(id++,"Charmander","Fogo","",4,new GregorianCalendar(2017,Calendar.NOVEMBER,10).getTime()));
-        lista.add(new Pokemon(id++,"Charmeleon","Fogo","",5,new GregorianCalendar(2017,Calendar.NOVEMBER,10).getTime()));
-        lista.add(new Pokemon(id++,"Charizard","Fogo","Voador",6,new GregorianCalendar(2017,Calendar.NOVEMBER,10).getTime()));
-        lista.add(new Pokemon(id++,"Squirtle","Água","",7,new GregorianCalendar(2017,Calendar.NOVEMBER,10).getTime()));
-        lista.add(new Pokemon(id++,"Wartortle","Água","",8,new GregorianCalendar(2017,Calendar.NOVEMBER,10).getTime()));
-        lista.add(new Pokemon(id++,"Blastoise","Água","",9,new GregorianCalendar(2017,Calendar.NOVEMBER,10).getTime()));
+    private PokemonDao(){
+        super(Main.getContext(),"DbPokemon",null,3);
     }
 
-    public List<Pokemon> getList(){
-        Collections.sort(lista);
-        return Collections.synchronizedList(lista);
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("create table pokemon ("+
+                        "id interger primary key autoincrement," +
+                        "nome text not null," +
+                        "numDex int not null," +
+                        "tipo1 int not null,"+
+                        "tipo2 int" +
+                        "dt_captura long not null," +
+                        "apaga int not null" +
+                        "poke_image blob,"
+                    );
     }
 
-    public List<Long> listarIds(String ordem){
-
-        if(ordem.equals("Num Dex")){
-            Log.d("Adapter", ordem);
-            Collections.sort(lista);
-        }else if(ordem.equals("Nome")){
-            Log.d("Adapter", ordem);
-            Collections.sort(lista,new OrdenaPorNome());
-        }else{
-            Log.d("Adapter", ordem);
-            Collections.sort(lista,new OrdenaDtCaptura());
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        switch (oldVersion){
+            case 1:
+//                db.execSQL("alter table pokemon add column delA int not null");
+            case 2:
+//                db.execSQL("alter table pokemon add column delB int not null");
         }
-
-        List<Long> ids = new ArrayList<>();
-        for(Pokemon obj: lista){
-            ids.add(obj.getId());
-        }
-
-        return ids;
     }
 
-    public Pokemon getPokemon(final Long id){
-        Pokemon poke = null;
-        for (Pokemon pokemon: lista) {
-            if(pokemon.getId() == id){
-                poke = pokemon;
-                break;
+    private void setData(SQLiteStatement sql, Pokemon obj){
+        sql.bindString(1, obj.getNome());
+        sql.bindLong(2, obj.getDexNum());
+        sql.bindString(3, obj.getTipo1());
+        sql.bindString(4, obj.getTipo2());
+        sql.bindLong(5, obj.getDtCaptura().getTime());
+        sql.bindLong(6, (obj.isApagar() ? 1 : 0));
+        sql.bindBlob(7, obj.getFotoPoke() != null ? obj.getFotoPoke() : new byte[] {});
+    }
+
+    private Pokemon getData(Cursor cursor) {
+        Pokemon obj = new Pokemon();
+        obj.setId(cursor.getLong(0));
+        obj.setNome(cursor.getString(1));
+        obj.setDexNum(cursor.getInt(2));
+        obj.setTipo1(cursor.getString(3));
+        obj.setTipo2(cursor.getString(4));
+        obj.setDtCaptura(new Date(cursor.getLong(5)));
+        obj.setApagar(cursor.getLong(6) == 1);
+        obj.setFotoPoke(cursor.getBlob(7).length > 0 ? cursor.getBlob(7) : null);
+        return obj;
+    }
+
+    public void salvar(Pokemon obj) {
+        // Abre o banco de dados para escrita
+        SQLiteDatabase db = getWritableDatabase();
+
+        // Produra registro com o mesmo nome
+        Cursor cursor = db.rawQuery("select * from pokemon " +
+                                    "where lower(nome)=? and lower(tipo1)=?",
+                new String[]{
+                        obj.getNome().toLowerCase(),
+                        obj.getTipo1().toLowerCase()
+
+                }
+        );
+
+        if(cursor.getCount() == 0 ){ // não encontrado, salva
+            String sql = "Insert into pokemon (nome,numDex,tipo1, tipo2, dt_captura, apaga, poke_image)"+
+                         "values (?,?,?,?,?,?,?)";
+            SQLiteStatement insert = db.compileStatement(sql);
+            setData(insert, obj);
+            insert.execute();
+            cursor.close();
+            cursor = db.rawQuery("select last_insert_rawid() from pokemon", null);
+            if(cursor.getCount() > 0){
+                cursor.moveToFirst();
+                obj.setId(cursor.getLong(0));
             }
-        }
-
-//        Pokemon pokeLocalizado = lista.get(lista.indexOf(new Pokemon(id)));
-
-        return poke;
-    }
-
-    public void salvar(Pokemon poke){
-        if(poke.getId() == null){
-            poke.setId(id++);
-            lista.add(poke);
         }else{
-            int posicao = lista.indexOf(new Pokemon(poke.getId()));
-            lista.set(posicao, poke);
+            cursor.moveToFirst();
+            obj.setId(cursor.getLong(0));
+
+            String sql = "update pokemon set nome=?,numDex=?,tipo1=?, tipo2=?, dt_captura=?, apaga=?, poke_image=?" +
+                         "where id=?";
+            SQLiteStatement update = db.compileStatement(sql);
+            setData(update, obj);
+            update.bindLong(7,obj.getId());
+            update.execute();
         }
-    }
-    public void apagar(long id){
-        lista.remove(new Pokemon(id));
+        cursor.close();
+        db.close();
     }
 
-    class OrdenaPorNome implements Comparator<Pokemon> {
+    public void remover(Long id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("delete from pokemon where id =" +id);
+        db.close();
+    }
 
-        @Override
-        public int compare(Pokemon poke1, Pokemon poke2) {
-            return poke1.getNome().compareToIgnoreCase(poke2.getNome());
+    public List<Long> listarIds(String ordem) {
+        String query;
+        if(ordem.equals("Pokemon")){
+
         }
+        return null;
     }
 
-    class OrdenaDtCaptura implements Comparator<Pokemon> {
-
-        @Override
-        public int compare(Pokemon poke1, Pokemon poke2) {
-            return poke1.getDtCaptura().compareTo(poke2.getDtCaptura());
-        }
-    }
 }

@@ -21,7 +21,7 @@ import java.util.Map;
 
 import br.senai.sp.informatica.mobileb.pokedex.R;
 import br.senai.sp.informatica.mobileb.pokedex.model.Pokemon;
-import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDao;
+import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDaoOld;
 import br.senai.sp.informatica.mobileb.pokedex.util.Utilitarios;
 
 
@@ -32,7 +32,7 @@ import br.senai.sp.informatica.mobileb.pokedex.util.Utilitarios;
 public class PokemonAdapter extends BaseAdapter {
 
     private final Activity activity;
-    private PokemonDao dao = PokemonDao.manager;
+    private PokemonDaoOld dao = PokemonDaoOld.manager;
     private Map<Integer,Long> mapa;
     private static DateFormat dtfmt = DateFormat.getDateInstance(DateFormat.LONG);
     //private boolean statusApaga;

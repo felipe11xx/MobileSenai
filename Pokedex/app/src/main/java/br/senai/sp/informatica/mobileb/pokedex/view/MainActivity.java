@@ -31,7 +31,7 @@ import java.util.List;
 
 import br.senai.sp.informatica.mobileb.pokedex.R;
 import br.senai.sp.informatica.mobileb.pokedex.model.Pokemon;
-import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDao;
+import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDaoOld;
 import br.senai.sp.informatica.mobileb.pokedex.util.Utilitarios;
 import br.senai.sp.informatica.mobileb.pokedex.view.adapter.PokemonAdapter;
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static int PREF_ACTION = 2;
     private MenuItem lixoItem,voltaItem,addItem;
     private List<Long> removeId;
-    private PokemonDao dao = PokemonDao.manager;
+    private PokemonDaoOld dao = PokemonDaoOld.manager;
     private Pokemon poke;
     private DrawerLayout drawer;
     // Atributos utilizados no Navigation Drawer

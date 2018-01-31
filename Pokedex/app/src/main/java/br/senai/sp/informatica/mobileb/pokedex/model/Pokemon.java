@@ -2,6 +2,7 @@ package br.senai.sp.informatica.mobileb.pokedex.model;
 
 import android.support.annotation.NonNull;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -17,6 +18,8 @@ public class Pokemon implements Comparable<Pokemon>{
     private int dexNum;
     private Date dtCaptura;
     private boolean apagar;
+    private static SimpleDateFormat fmtData =
+            new SimpleDateFormat("dd 'de' MMMM 'de' yyyy");
 
 
 

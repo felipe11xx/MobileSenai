@@ -23,7 +23,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import br.senai.sp.informatica.mobileb.pokedex.R;
 import br.senai.sp.informatica.mobileb.pokedex.model.Pokemon;
-import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDao;
+import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDaoOld;
 import br.senai.sp.informatica.mobileb.pokedex.util.DateDialog;
 import br.senai.sp.informatica.mobileb.pokedex.util.Utilitarios;
 
@@ -38,7 +38,7 @@ public class EditarActivity extends AppCompatActivity {
     private MenuItem menuItem;
     private Intent i;
     private Pokemon poke;
-    private PokemonDao dao = PokemonDao.manager;
+    private PokemonDaoOld dao = PokemonDaoOld.manager;
     private Long id;
     private DateFormat dtfmt = DateFormat.getDateInstance(DateFormat.LONG);
     private Calendar calendar = Calendar.getInstance();
