@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,14 +25,14 @@ public class PokemonDao extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table pokemon ("+
-                        "id interger primary key autoincrement," +
+                        "id integer primary key autoincrement," +
                         "nome text not null," +
                         "numDex int not null," +
                         "tipo1 int not null,"+
-                        "tipo2 int" +
-                        "dt_captura long not null," +
-                        "apaga int not null" +
-                        "poke_image blob,"
+                        "tipo2 int," +
+                        "dtCaptura long not null," +
+                        "apaga int not null," +
+                        "poke_image blob)"
                     );
     }
 
@@ -83,13 +84,13 @@ public class PokemonDao extends SQLiteOpenHelper {
         );
 
         if(cursor.getCount() == 0 ){ // não encontrado, salva
-            String sql = "Insert into pokemon (nome,numDex,tipo1, tipo2, dt_captura, apaga, poke_image)"+
+            String sql = "insert into pokemon (nome, numDex, tipo1, tipo2, dtCaptura, apaga, poke_image)"+
                          "values (?,?,?,?,?,?,?)";
             SQLiteStatement insert = db.compileStatement(sql);
             setData(insert, obj);
             insert.execute();
             cursor.close();
-            cursor = db.rawQuery("select last_insert_rawid() from pokemon", null);
+            cursor = db.rawQuery("select last_insert_rowid() from pokemon", null);
             if(cursor.getCount() > 0){
                 cursor.moveToFirst();
                 obj.setId(cursor.getLong(0));
@@ -98,7 +99,7 @@ public class PokemonDao extends SQLiteOpenHelper {
             cursor.moveToFirst();
             obj.setId(cursor.getLong(0));
 
-            String sql = "update pokemon set nome=?,numDex=?,tipo1=?, tipo2=?, dt_captura=?, apaga=?, poke_image=?" +
+            String sql = "update pokemon set nome=?,numDex=?,tipo1=?, tipo2=?, dtCaptura=?, apaga=?, poke_image=?" +
                          "where id=?";
             SQLiteStatement update = db.compileStatement(sql);
             setData(update, obj);
@@ -117,10 +118,75 @@ public class PokemonDao extends SQLiteOpenHelper {
 
     public List<Long> listarIds(String ordem) {
         String query;
-        if(ordem.equals("Pokemon")){
-
+        if(ordem.equals("Num Dex")){
+            query = "select id from pokemon order by numDex";
+        } else if (ordem.equals("Nome")){
+            query = "select id from pokemon order by nome";
+        }else {
+            query = "select id from pokemon order by dt_captura";
         }
-        return null;
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        List<Long> lista = new ArrayList<>();
+
+        if(cursor.getCount() > 0) {
+            cursor.moveToFirst();
+
+            for (int i = 0; i < cursor.getCount(); i++){
+                lista.add(cursor.getLong(0));
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
+    public Pokemon localizar(Long id) {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from pokemon where id=?",
+                new String[] {String.valueOf(id)});
+        Pokemon obj = null;
+        if(cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            obj = getData(cursor);
+        }
+        cursor.close();
+        db.close();
+
+        return obj;
+    }
+
+    public void removerMarcados() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("delete from album where apaga = 1");
+        db.close();
+    }
+
+    public boolean existeAlbunsADeletar() {
+        boolean existe = false;
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("select count(*) " +
+                "from album where apaga = 1", null);
+        if(cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            if(cursor.getInt(0) > 0)
+                existe = true;
+
+            cursor.close();
+        }
+
+        db.close();
+
+        return existe;
+    }
+
+    public void limpaMarcados() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("update pokemon set apaga = 0 where apaga = 1");
+        db.close();
     }
 
 }

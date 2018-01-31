@@ -31,6 +31,7 @@ import java.util.List;
 
 import br.senai.sp.informatica.mobileb.pokedex.R;
 import br.senai.sp.informatica.mobileb.pokedex.model.Pokemon;
+import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDao;
 import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDaoOld;
 import br.senai.sp.informatica.mobileb.pokedex.util.Utilitarios;
 import br.senai.sp.informatica.mobileb.pokedex.view.adapter.PokemonAdapter;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static int PREF_ACTION = 2;
     private MenuItem lixoItem,voltaItem,addItem;
     private List<Long> removeId;
-    private PokemonDaoOld dao = PokemonDaoOld.manager;
+    private PokemonDao dao = PokemonDao.instance;
     private Pokemon poke;
     private DrawerLayout drawer;
     // Atributos utilizados no Navigation Drawer
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                poke = dao.getPokemon(id);
+                poke = dao.localizar(id);
                 //Se a lista de exclusão estiver vazia vai para a tela de alteração
                 if (removeId.isEmpty()) {
                     //Passa parametros de alteração via bundle
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 voltaItem.setVisible(true);
                 addItem.setVisible(false);
 
-                poke = dao.getPokemon(id);
+                poke = dao.localizar(id);
 
                 //verifica se o id do item existe na lista de exclusão
                 if(removeId.contains(itemLista.getItem(position))){
@@ -242,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public void onClick(DialogInterface dialog, int id) {
                         //confere os ids na lista e os apaga ao terminar recria a ActivityMain
                         for (Long idPoke:removeId) {
-                            dao.apagar(idPoke);
+                            dao.remover(idPoke);
 
                         }
                         Toast.makeText(getBaseContext(), "Pokemon Apagado !", Toast.LENGTH_LONG).show();
@@ -263,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.desfazIcon:
                 for (Long idPoke:removeId) {
-                    poke = dao.getPokemon(idPoke);
+                    poke = dao.localizar(idPoke);
                     if(poke.getId() == idPoke) {
                         poke.setApagar(false);
                     }

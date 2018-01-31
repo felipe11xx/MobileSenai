@@ -21,6 +21,7 @@ import java.util.Map;
 
 import br.senai.sp.informatica.mobileb.pokedex.R;
 import br.senai.sp.informatica.mobileb.pokedex.model.Pokemon;
+import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDao;
 import br.senai.sp.informatica.mobileb.pokedex.model.PokemonDaoOld;
 import br.senai.sp.informatica.mobileb.pokedex.util.Utilitarios;
 
@@ -32,7 +33,7 @@ import br.senai.sp.informatica.mobileb.pokedex.util.Utilitarios;
 public class PokemonAdapter extends BaseAdapter {
 
     private final Activity activity;
-    private PokemonDaoOld dao = PokemonDaoOld.manager;
+    private PokemonDao dao = PokemonDao.instance;
     private Map<Integer,Long> mapa;
     private static DateFormat dtfmt = DateFormat.getDateInstance(DateFormat.LONG);
     //private boolean statusApaga;
@@ -79,7 +80,7 @@ public class PokemonAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int id) {
-        return dao.getPokemon((long)id);
+        return dao.localizar((long)id);
     }
 
     @Override
@@ -116,7 +117,7 @@ public class PokemonAdapter extends BaseAdapter {
         TextView tvDtCap = layout.findViewById(R.id.dtCaptTxt);
         ImageView ivFoto = layout.findViewById(R.id.imagePoke);
 
-        Pokemon pokemon = dao.getPokemon(mapa.get(linha));
+        Pokemon pokemon = dao.localizar(mapa.get(linha));
         tvPokemon.setText(pokemon.getNome());
         tvTipo1.setText(pokemon.getTipo1());
         tvTipo2.setText(pokemon.getTipo2());
