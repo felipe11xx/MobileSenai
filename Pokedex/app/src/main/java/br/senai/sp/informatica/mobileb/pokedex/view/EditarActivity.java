@@ -113,7 +113,7 @@ public class EditarActivity extends AppCompatActivity {
     public void cadastrarEditar() {
 
         String msg;
-        String dexNum = dexNumEdt.getText().toString();
+        String dexNum = dexNumEdt.getText().toString().trim();
         //A classe JogoDao faz o controle de cadastro ou inclusão pela nulidade do ID
         if (id != null) {
             poke.setId(id);
@@ -122,13 +122,13 @@ public class EditarActivity extends AppCompatActivity {
             msg = "Pokemon cadastrado com Sucesso !";//getResources().getString(R.string.jogoCadastrado);
         }
 
-        poke.setNome(nomeEdt.getText().toString());
+        poke.setNome(nomeEdt.getText().toString().trim());
 
         if(!dexNum.isEmpty()) {
             poke.setDexNum(Integer.parseInt(dexNum));
         }
-        poke.setTipo1(tipo1Edt.getText().toString());
-        poke.setTipo2(tipo2Edt.getText().toString());
+        poke.setTipo1(tipo1Edt.getText().toString().trim());
+        poke.setTipo2(tipo2Edt.getText().toString().trim());
         poke.setDtCaptura(calendar.getTime());
 
         // Demostra como obter um Bitmap de um ImageView
@@ -147,13 +147,17 @@ public class EditarActivity extends AppCompatActivity {
             msg = "Cadastro Invalido !!";//getResources().getString(R.string.semConteudo);
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         } else{
-            dao.salvar(poke);
+            try {
+                dao.salvar(poke);
 
-            setResult(Activity.RESULT_OK);
-            Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-            finish();
+                setResult(Activity.RESULT_OK);
+                Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+                finish();
 
-            //startActivity(intent);
+                //startActivity(intent);
+            } catch (Exception ex) {
+                Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
+            }
         }
         //finish();
 

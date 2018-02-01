@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,27 +19,27 @@ import br.senai.sp.informatica.mobileb.pokedex.Main;
 public class PokemonDao extends SQLiteOpenHelper {
     public static PokemonDao instance = new PokemonDao();
 
-    private PokemonDao(){
-        super(Main.getContext(),"DbPokemon",null,3);
+    private PokemonDao() {
+        super(Main.getContext(), "DbPokemon", null, 3);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table pokemon ("+
-                        "id integer primary key autoincrement," +
-                        "nome text not null," +
-                        "numDex int not null," +
-                        "tipo1 int not null,"+
-                        "tipo2 int," +
-                        "dtCaptura long not null," +
-                        "apaga int not null," +
-                        "poke_image blob)"
-                    );
+        db.execSQL("create table pokemon (" +
+                "id integer primary key autoincrement," +
+                "nome text not null," +
+                "num_dex int not null," +
+                "tipo1 int not null," +
+                "tipo2 int," +
+                "dt_captura long not null," +
+                "apaga int not null," +
+                "poke_image blob)"
+        );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        switch (oldVersion){
+        switch (oldVersion) {
             case 1:
 //                db.execSQL("alter table pokemon add column delA int not null");
             case 2:
@@ -46,14 +47,14 @@ public class PokemonDao extends SQLiteOpenHelper {
         }
     }
 
-    private void setData(SQLiteStatement sql, Pokemon obj){
+    private void setData(SQLiteStatement sql, Pokemon obj) {
         sql.bindString(1, obj.getNome());
         sql.bindLong(2, obj.getDexNum());
         sql.bindString(3, obj.getTipo1());
         sql.bindString(4, obj.getTipo2());
         sql.bindLong(5, obj.getDtCaptura().getTime());
         sql.bindLong(6, (obj.isApagar() ? 1 : 0));
-        sql.bindBlob(7, obj.getFotoPoke() != null ? obj.getFotoPoke() : new byte[] {});
+        sql.bindBlob(7, obj.getFotoPoke() != null ? obj.getFotoPoke() : new byte[]{});
     }
 
     private Pokemon getData(Cursor cursor) {
@@ -69,13 +70,13 @@ public class PokemonDao extends SQLiteOpenHelper {
         return obj;
     }
 
-    public void salvar(Pokemon obj) {
+    public void salvar(Pokemon obj) throws Exception {
         // Abre o banco de dados para escrita
         SQLiteDatabase db = getWritableDatabase();
 
         // Produra registro com o mesmo nome
         Cursor cursor = db.rawQuery("select * from pokemon " +
-                                    "where lower(nome)=? and lower(tipo1)=?",
+                        "where lower(nome)=? and lower(tipo1)=?",
                 new String[]{
                         obj.getNome().toLowerCase(),
                         obj.getTipo1().toLowerCase()
@@ -83,31 +84,56 @@ public class PokemonDao extends SQLiteOpenHelper {
                 }
         );
 
-        if(cursor.getCount() == 0 ){ // não encontrado, salva
-            String sql = "insert into pokemon (nome, numDex, tipo1, tipo2, dtCaptura, apaga, poke_image)"+
-                         "values (?,?,?,?,?,?,?)";
+        Log.d("Cursor valor", String.valueOf(cursor.getCount()));
+
+        if (cursor.getCount() == 0 && obj.getId() == null) {
+            // O Nome do Pokemon deste tipo NÃO foi encontrado e é um novo registro
+
+            String sql = "insert into pokemon (nome, num_dex, tipo1, tipo2, dt_captura, apaga, poke_image)" +
+                    "values (?,?,?,?,?,?,?)";
             SQLiteStatement insert = db.compileStatement(sql);
             setData(insert, obj);
             insert.execute();
             cursor.close();
-            cursor = db.rawQuery("select last_insert_rowid() from pokemon", null);
-            if(cursor.getCount() > 0){
+//            cursor = db.rawQuery("select last_insert_rowid() from pokemon", null);
+//            if (cursor.getCount() > 0) {
+//                cursor.moveToFirst();
+//                obj.setId(cursor.getLong(0));
+//            }
+        } else {
+            if (cursor.getCount() != 0 && obj.getId() == null) {
+                // O Nome do Pokemon deste tipo foi encontrado e é um novo registro
+                throw new Exception("nome e tipo duplicado");
+            } else if (cursor.getCount() != 0 && obj.getId() != null) {
+                // O Nome do Pokemon deste tipo foi encontrado e NÃO é um novo registro
                 cursor.moveToFirst();
-                obj.setId(cursor.getLong(0));
-            }
-        }else{
-            cursor.moveToFirst();
-            obj.setId(cursor.getLong(0));
+                long id = cursor.getLong(0);
 
-            String sql = "update pokemon set nome=?,numDex=?,tipo1=?, tipo2=?, dtCaptura=?, apaga=?, poke_image=?" +
-                         "where id=?";
-            SQLiteStatement update = db.compileStatement(sql);
-            setData(update, obj);
-            update.bindLong(7,obj.getId());
-            update.execute();
+                if (obj.getId() != id) {
+                    // O Nome do Pokemon deste tipo foi encontrado e NÃO é o MESMO registro
+                    throw new Exception("nome e tipo duplicado");
+                } else {
+                    // O Nome do Pokemon deste tipo foi encontrado e é o MESMO registro
+                    doUpdate(db, obj);
+                }
+            } else {
+                // O Nome do Pokemon deste tipo NÃO foi encontrado e é um novo registro
+                doUpdate(db, obj);
+            }
         }
+
+
         cursor.close();
         db.close();
+    }
+
+    private void doUpdate( SQLiteDatabase db, Pokemon obj) {
+        String sql = "update pokemon set nome=?,num_dex=?,tipo1=?, tipo2=?, dt_captura=?, apaga=?, poke_image=?" +
+                "where id=?";
+        SQLiteStatement update = db.compileStatement(sql);
+        setData(update, obj);
+        update.bindLong(8, obj.getId());
+        update.execute();
     }
 
     public void remover(Long id){
@@ -119,7 +145,7 @@ public class PokemonDao extends SQLiteOpenHelper {
     public List<Long> listarIds(String ordem) {
         String query;
         if(ordem.equals("Num Dex")){
-            query = "select id from pokemon order by numDex";
+            query = "select id from pokemon order by num_dex";
         } else if (ordem.equals("Nome")){
             query = "select id from pokemon order by nome";
         }else {
