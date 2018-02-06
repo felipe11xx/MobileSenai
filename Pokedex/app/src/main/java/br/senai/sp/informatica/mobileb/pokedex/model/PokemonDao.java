@@ -186,16 +186,16 @@ public class PokemonDao extends SQLiteOpenHelper {
 
     public void removerMarcados() {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("delete from album where apaga = 1");
+        db.execSQL("delete from pokemon where apaga = 1");
         db.close();
     }
 
-    public boolean existeAlbunsADeletar() {
+    public boolean existePokemonADeletar() {
         boolean existe = false;
 
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("select count(*) " +
-                "from album where apaga = 1", null);
+                "from pokemon where apaga = 1", null);
         if(cursor.getCount() > 0) {
             cursor.moveToFirst();
             if(cursor.getInt(0) > 0)

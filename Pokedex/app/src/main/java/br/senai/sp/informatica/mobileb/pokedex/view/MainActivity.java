@@ -106,28 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 }else{
 
-                    //verifica se o id do item existe na lista de exclusão
-                    if(removeId.contains(itemLista.getItemId(position))){
-                    //  if(poke.isApagar()) {
-                          //se ja existe então retira da lista e volta a cor do item para a original
-                          view.setBackgroundColor(getResources().getColor(R.color.fundoDoListView));
-
-                          removeId.remove(itemLista.getItemId(position));
-                          poke.setApagar(false);
-                    //  }
-                    }else{
-                       //if(!poke.isApagar()) {
-                           //senão existir add ele na lista
-                           view.setBackgroundColor(getResources().getColor(R.color.ItemSelecionado));
-                           removeId.add(itemLista.getItemId(position));
-                           poke.setApagar(true);
-                      // }
-                    }
-
-                    //ao deselecionar todos os itens da lista de exclução recria a view com o menu inicial
-                    if(removeId.isEmpty()){
-                        recreate();
-                    }
+                    selecinaApaga(position,view);
 
                 }
             }
@@ -142,32 +121,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 lixoItem.setVisible(true);
                 voltaItem.setVisible(true);
                 addItem.setVisible(false);
-
                 poke = dao.localizar(id);
 
-                //verifica se o id do item existe na lista de exclusão
-                if(removeId.contains(itemLista.getItem(position))){
-                   // if (poke.isApagar()) {
-                        //se ja existe então retira da lista e volta a cor do item para a original
-                        view.setBackgroundColor(getResources().getColor(R.color.fundoDoListView));
-                        removeId.remove(itemLista.getItemId(position));
-                        poke.setApagar(false);
-                   // }
-                }else{
-                    //senão existir add ele na lista
-                   // if (!poke.isApagar()) {
-                        view.setBackgroundColor(getResources().getColor(R.color.ItemSelecionado));
-                        removeId.add(itemLista.getItemId(position));
-                        poke.setApagar(true);
-                   // }
-                }
+                selecinaApaga(position,view);
 
-                //ao deselecionar todos os itens da lista de exclução recria a view com o menu inicial
-                if(removeId.isEmpty()){
-                    recreate();
-                }
                 return true;
-
             }
         });
     }
@@ -210,9 +168,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
-        }
-        super.onBackPressed();
+        }else if(lixoItem.isVisible()){
+            for (Long idPoke:removeId) {
+                poke = dao.localizar(idPoke);
+                if(poke.getId() == idPoke) {
+                    poke.setApagar(false);
+                    salvar();
+                }
+            }
 
+
+        }
+        recreate();
     }
 
     @Override
@@ -232,7 +199,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.apagaIcon:
 
-
                 //Cria o Builder do dialogo de exclusão
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("Deseja mesmo Excluir ?")
@@ -241,14 +207,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // Cria botões ok e cancelar
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //confere os ids na lista e os apaga ao terminar recria a ActivityMain
-                        for (Long idPoke:removeId) {
-                            dao.remover(idPoke);
-
-                        }
-                        Toast.makeText(getBaseContext(), "Pokemon Apagado !", Toast.LENGTH_LONG).show();
+                        //remove todos os marcados com isapaga
+                        dao.removerMarcados();
+                        Toast.makeText(getBaseContext(), "Pokemon Apagado/s !", Toast.LENGTH_LONG).show();
                         recreate();
-                       // removeId.removeAll();
+
                     }
                 });
                 builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -267,12 +230,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     poke = dao.localizar(idPoke);
                     if(poke.getId() == idPoke) {
                         poke.setApagar(false);
+                        salvar();
                     }
                 }
                 recreate();
                 break;
         }
-
         return true;
     }
 
@@ -298,5 +261,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    public void salvar(){
+        try {
+            dao.salvar(poke);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void selecinaApaga(int position, View view){
+        //verifica se o id do item existe na lista de exclusão
+        if(removeId.contains(itemLista.getItemId(position))){
+            //  if(poke.isApagar()) {
+            //se ja existe então retira da lista e volta a cor do item para a original
+            view.setBackgroundColor(getResources().getColor(R.color.fundoDoListView));
+
+            removeId.remove(itemLista.getItemId(position));
+            poke.setApagar(false);
+            salvar();
+            //  }
+        }else{
+            //if(!poke.isApagar()) {
+            //senão existir add ele na lista
+            view.setBackgroundColor(getResources().getColor(R.color.ItemSelecionado));
+            removeId.add(itemLista.getItemId(position));
+            poke.setApagar(true);
+            salvar();
+            // }
+        }
+
+        //ao deselecionar todos os itens da lista de exclução recria a view com o menu inicial
+        if(removeId.isEmpty()){
+            recreate();
+        }
+    }
 }

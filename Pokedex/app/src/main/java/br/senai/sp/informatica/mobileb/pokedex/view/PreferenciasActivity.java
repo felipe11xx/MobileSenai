@@ -1,6 +1,7 @@
 package br.senai.sp.informatica.mobileb.pokedex.view;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -38,4 +39,10 @@ public class PreferenciasActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        setResult(Activity.RESULT_OK);
+        finish();
+        super.onBackPressed();
+    }
 }
