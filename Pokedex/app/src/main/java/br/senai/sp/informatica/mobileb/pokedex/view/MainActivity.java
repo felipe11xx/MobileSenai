@@ -106,12 +106,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 }else{
 
-                    selecinaApaga(position,view);
+                    selecionaApaga(position,view);
 
+
+                    
                 }
             }
         });
-
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
 
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 addItem.setVisible(false);
                 poke = dao.localizar(id);
 
-                selecinaApaga(position,view);
+                selecionaApaga(position,view);
 
                 return true;
             }
@@ -269,7 +270,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    public void selecinaApaga(int position, View view){
+    public void selecionaApaga(int position, View view){
         //verifica se o id do item existe na lista de exclusão
         if(removeId.contains(itemLista.getItemId(position))){
             //  if(poke.isApagar()) {
