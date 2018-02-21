@@ -107,8 +107,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }else{
 
                     selecionaApaga(position,view);
-
-
                     
                 }
             }
