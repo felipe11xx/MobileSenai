@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.senai.sp.informatica.mobileb.exemplo_firebase.MainActivity">
+    tools:context="br.senai.sp.informatica.mobileb.exemplo_firebase.view.MainActivity">
 
     <EditText
         android:id="@+id/edtEmail"
