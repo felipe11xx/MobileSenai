@@ -3,4 +3,6 @@
     <string name="logoff">logoff</string>
     <string name="login">Login</string>
     <string name="nova_conta">Nova Conta</string>
+    <string name="senha">Senha</string>
+    <string name="e_mail">Email</string>
 </resources>
