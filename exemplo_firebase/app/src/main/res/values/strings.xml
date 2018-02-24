@@ -5,4 +5,8 @@
     <string name="nova_conta">Nova Conta</string>
     <string name="senha">Senha</string>
     <string name="e_mail">Email</string>
+    <string name="enviar">Enviar</string>
+    <string name="entre_com_a_mensagem">Digite a Mensagem:</string>
+    <string name="mensagem">Mensagem</string>
+    <string name="fulano">Fulano</string>
 </resources>

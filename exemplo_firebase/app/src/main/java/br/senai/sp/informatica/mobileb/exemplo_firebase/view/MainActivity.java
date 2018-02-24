@@ -1,127 +1,93 @@
 package br.senai.sp.informatica.mobileb.exemplo_firebase.view;
 
+import android.content.Intent;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
 
 import br.senai.sp.informatica.mobileb.exemplo_firebase.R;
+import br.senai.sp.informatica.mobileb.exemplo_firebase.dao.UsuarioDao;
+import br.senai.sp.informatica.mobileb.exemplo_firebase.lib.UsuarioChatArray;
+import br.senai.sp.informatica.mobileb.exemplo_firebase.model.Usuario;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity
+            implements AdapterView.OnItemClickListener{
+    private UsuarioDao dao = UsuarioDao.dao;
 
-    private FirebaseAuth mAuth;
-    private EditText edEmail,edSenha;
-    private TextView tvUID;
-    private MenuItem menuLogoff;
+    private ListView listView;
+    private UsuarioAdapter adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+        setContentView(R.layout.activity_main);
 
-        edEmail = findViewById(R.id.edtEmail);
-        edSenha = findViewById(R.id.edtPassword);
-        tvUID = findViewById(R.id.edtUID);
+        listView = findViewById(R.id.listView);
+        listView.setOnItemClickListener(this);
 
-        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_botoes,menu);
-        menuLogoff = menu.findItem(R.id.icon_logoff);
+        if(adapter == null){
+            FirebaseListOptions<Usuario> options = new FirebaseListOptions.Builder<Usuario>()
+                    .setSnapshotArray(new UsuarioChatArray())
+                    .setLayout(R.layout.layout_usuario)
+                    .setLifecycleOwner(this)
+                    .build();
 
-        return super.onCreateOptionsMenu(menu);
-    }
+            adapter = new UsuarioAdapter(options);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int idMenuItem = item.getItemId();
-
-        if(idMenuItem == R.id.icon_logoff){
-            logoutClick();
+            listView.setAdapter(adapter);
         }
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void novaContaClick(View v){
-        String email = edEmail.getText().toString();
-        String senha = edSenha.getText().toString();
-
-        //showProgressDialog();
-
-        mAuth.createUserWithEmailAndPassword(email, senha)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        }else{
-                            Toast.makeText(MainActivity.this, "Falha de autenticação.", Toast.LENGTH_LONG).show();
-                            updateUI(null);
-                        }
-
-                        //hideProgresseDialog();
-                    }
-                });
-    }
-
-    public void loginClick(View v){
-        String email = edEmail.getText().toString();
-        String senha = edSenha.getText().toString();
-
-        //showProgressDialog();
-
-        mAuth.signInWithEmailAndPassword(email, senha)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        }else{
-                            Toast.makeText(MainActivity.this, "Falha de autenticação.", Toast.LENGTH_LONG).show();
-                            updateUI(null);
-                        }
-
-                        //hideProgressDialog();
-                    }
-                });
     }
 
 
-    public void logoutClick(){
-        mAuth.signOut();
-        updateUI(null);
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.putExtra("destinatarioId", adapter.getItem(pos).getId());
+
+        startActivity(intent);
     }
 
-    private void updateUI(FirebaseUser user) {
+    private class UsuarioAdapter extends FirebaseListAdapter<Usuario> {
 
-        if(user != null) {
-            tvUID.setText(user.getUid());
-        }else {
-            tvUID.setText("");
+        public UsuarioAdapter(@NonNull FirebaseListOptions<Usuario> options) {
+            super(options);
+            dao.verificaMensagens();
+        }
+
+        @Override
+        protected void populateView(View v, Usuario model, int position) {
+            hideProgressDialog();
+            Log.e("UsuarioAdapter", "usuario: " + model.getEmail() + " logado: " + model.isLogado());
+            Log.e("UsuarioAdapter", "daoUID: " + dao.getUserId() + " modelUID: " + model.getId());
+
+            if(model.getId() != dao.getUserId()){
+                TextView tvUsuario = v.findViewById(R.id.tvUsuario);
+                ImageView imgLogado = v.findViewById(R.id.imgLogado);
+
+                tvUsuario.setText(model.getEmail());
+                if(model.isLogado()){
+                    imgLogado.setImageDrawable(getResources().getDrawable(R.drawable.verde));
+                }else{
+                    imgLogado.setImageDrawable(getResources().getDrawable(R.drawable.vermelho));
+                }
+            }
+
         }
     }
 }
